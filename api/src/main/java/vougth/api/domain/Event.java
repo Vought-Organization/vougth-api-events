@@ -18,7 +18,7 @@ public class Event {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idEvent;
+    private Integer idEvent;
     @Column(name = "cep", nullable = false)
     private String cep;
     @Column(name = "name_event", nullable = false)
@@ -43,12 +43,28 @@ public class Event {
     private LocalDateTime endData;
 
 
-    public Long getIdEvent() {
+    public Integer getIdEvent() {
         return idEvent;
     }
 
-    public void setIdEvent(Long idEvent) {
+    public void setIdEvent(Integer idEvent) {
         this.idEvent = idEvent;
+    }
+
+    public String getCategoryEvent() {
+        return categoryEvent;
+    }
+
+    public void setCategoryEvent(String categoryEvent) {
+        this.categoryEvent = categoryEvent;
+    }
+
+    public String getAddressEvent() {
+        return addressEvent;
+    }
+
+    public void setAddressEvent(String addressEvent) {
+        this.addressEvent = addressEvent;
     }
 
     public String getCep() {
