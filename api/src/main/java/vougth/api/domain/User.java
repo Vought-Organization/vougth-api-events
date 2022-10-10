@@ -35,6 +35,10 @@ public class User {
     @Column(name = "nickname", nullable = false)
     private String nickname;
 
+    @ManyToOne
+    @JoinColumn(name = "id")
+    private Event event;
+
     public Integer getIdUser() {
         return idUser;
     }

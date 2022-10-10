@@ -24,6 +24,9 @@ public class Ticket {
     private Double precoIngresso;
     @Column(name = "code_ticket", nullable = false)
     private UUID ticketCode = UUID.randomUUID();
+    @ManyToOne
+    @JoinColumn(name = "id")
+    private Event event;
 
     public Integer getIdIngresso() {
         return idIngresso;
