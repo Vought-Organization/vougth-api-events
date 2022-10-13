@@ -4,86 +4,91 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.PastOrPresent;
+import java.util.Date;
+
 @Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "users")
-public class User {
+public class User{
+    private boolean adiministrador = false;
+    @CPF
+    private String cpf;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idUser;
+    private String nomeCompleto;
 
-    @Column(name = "user_name", nullable = false)
-    private String userName;
+    @PastOrPresent
+    private Date dataNascimento;
 
+    private String telefoneCelular;
 
-    @Column(name = "email", nullable = false)
-    @Email
-    private String email;
-
-    @Column(name = "password", nullable = false)
-    private String password;
-
-    @Column(name = "profile_photo", nullable = false)
-    private String photoProfile;
-
-    @Column(name = "nickname", nullable = false)
-    private String nickname;
+    private String cep;
 
     @ManyToOne
     @JoinColumn(name = "id")
     private Event event;
 
-    public Integer getIdUser() {
-        return idUser;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setIdUser(Integer idUser) {
-        this.idUser = idUser;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getNomeCompleto() {
+        return nomeCompleto;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setNomeCompleto(String nomeCompleto) {
+        this.nomeCompleto = nomeCompleto;
     }
 
-    public String getNickname() {
-        return nickname;
+    public Date getDataNascimento() {
+        return dataNascimento;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
-    public String getEmail() {
-        return email;
+    public String getTelefoneCelular() {
+        return telefoneCelular;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setTelefoneCelular(String telefoneCelular) {
+        this.telefoneCelular = telefoneCelular;
     }
 
-    public String getPassword() {
-        return password;
+    public String getCep() {
+        return cep;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setCep(String cep) {
+        this.cep = cep;
     }
 
-    public String getPhotoProfile() {
-        return photoProfile;
+    public Event getEvent() {
+        return event;
     }
 
-    public void setPhotoProfile(String photoProfile) {
-        this.photoProfile = photoProfile;
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
+    public boolean isAdiministrador() {
+        return adiministrador;
+    }
+
+    public void setAdiministrador(boolean adiministrador) {
+        this.adiministrador = adiministrador;
     }
 }

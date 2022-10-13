@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import vougth.api.domain.User;
+import vougth.api.dto.UserRegistration;
 import vougth.api.repository.UserRepository;
 
 import java.util.List;
@@ -15,12 +16,18 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User newUser){
+//    @PostMapping
+//    public ResponseEntity<UserRegistration> createUser(@RequestBody UserRegistration newUser){
+//        userRepository.save(newUser);
+//        return ResponseEntity.status(201).body(newUser);
+//    }
+
+    @PostMapping("/user-event")
+    public ResponseEntity<User> registrationUserEvent(@RequestBody User newUser){
+        newUser.setAdiministrador(true);
         userRepository.save(newUser);
         return ResponseEntity.status(201).body(newUser);
     }
-
     @GetMapping
     public ResponseEntity<List<User>> getAllUser(){
         List<User> userList = userRepository.findAll();
