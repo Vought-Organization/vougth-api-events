@@ -19,6 +19,21 @@ import java.util.Date;
 @NoArgsConstructor
 @Table(name = "users")
 public class User{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer idUser;
+    @NotBlank
+    @Column(name = "user_name", nullable = false)
+    private String userName;
+
+    @NotBlank
+    @Column(name = "email", nullable = false)
+    @Email
+    private String email;
+
+    @NotBlank
+    @Column(name = "password", nullable = false)
+    private String password;
     private boolean adiministrador = false;
     @CPF
     private String cpf;
@@ -33,7 +48,7 @@ public class User{
     private String cep;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+//    @JoinColumn(name = "id")
     private Event event;
 
     public String getCpf() {
@@ -90,5 +105,37 @@ public class User{
 
     public void setAdiministrador(boolean adiministrador) {
         this.adiministrador = adiministrador;
+    }
+
+    public Integer getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(Integer idUser) {
+        this.idUser = idUser;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

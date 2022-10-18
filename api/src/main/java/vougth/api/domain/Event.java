@@ -44,11 +44,11 @@ public class Event {
     @Column(name = "endData", nullable = false)
     private LocalDateTime endData;
 
-    @OneToMany(mappedBy = "event")
-    private List<User> users = new ArrayList<>();
-
-    @OneToMany(mappedBy = "event")
-    private List<Ticket> tickets = new ArrayList<>();
+//    @OneToMany(mappedBy = "event")
+//    private List<User> users = new ArrayList<>();
+//
+//    @OneToMany(mappedBy = "event")
+//    private List<Ticket> tickets = new ArrayList<>();
 
     public Integer getIdEvent() {
         return idEvent;
@@ -128,14 +128,6 @@ public class Event {
 
     public void setAddress(String address) {
         this.addressEvent = address;
-    }
-
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
     }
 
     public String getCity() {
