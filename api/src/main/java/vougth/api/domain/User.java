@@ -35,6 +35,23 @@ public class User {
     @Column(name = "nickname", nullable = false)
     private String nickname;
 
+    private String cpf;
+
+    private String telefone;
+
+    private String cep;
+
+    @ManyToOne
+    private Event event;
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
     public Integer getIdUser() {
         return idUser;
     }
@@ -81,5 +98,29 @@ public class User {
 
     public void setPhotoProfile(String photoProfile) {
         this.photoProfile = photoProfile;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
     }
 }

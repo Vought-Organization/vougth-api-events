@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -19,28 +20,28 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idEvent;
-    @Column(name = "cep", nullable = false)
+    @Column(name = "cep")
     private String cep;
-    @Column(name = "name_event", nullable = false)
+    @Column(name = "name_event")
     private String nameEvent;
-    @Column(name = "category_event", nullable = false)
+    @Column(name = "category_event")
     private String categoryEvent;
-    @Column(name = "description", nullable = false)
+    @Column(name = "description")
     private String description;
-    @Column(name = "latitude", nullable = false)
+    @Column(name = "latitude")
     private String latitude;
-    @Column(name = "longitude", nullable = false)
+    @Column(name = "longitude")
     private String longitude;
-    @Column(name = "address_event", nullable = false)
+    @Column(name = "address_event")
     private String addressEvent;
-    @Column(name = "city", nullable = false)
+    @Column(name = "city")
     private String city;
-    @Column(name = "state", nullable = false)
+    @Column(name = "state")
     private String state;
-    @Column(name = "startData", nullable = false)
-    private LocalDateTime startData;
-    @Column(name = "endData", nullable = false)
-    private LocalDateTime endData;
+    @Column(name = "startData")
+    private String startData;
+    @Column(name = "endData")
+    private String endData;
 
 
     public Integer getIdEvent() {
@@ -139,19 +140,19 @@ public class Event {
         this.state = state;
     }
 
-    public LocalDateTime getStartData() {
+    public String getStartData() {
         return startData;
     }
 
-    public void setStartData(LocalDateTime startData) {
+    public void setStartData(String startData) {
         this.startData = startData;
     }
 
-    public LocalDateTime getEndData() {
+    public String getEndData() {
         return endData;
     }
 
-    public void setEndData(LocalDateTime endData) {
+    public void setEndData(String endData) {
         this.endData = endData;
     }
 }
