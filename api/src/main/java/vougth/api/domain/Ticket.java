@@ -18,12 +18,13 @@ public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idIngresso;
-    @Column(name = "quantidade_ingresso", nullable = false)
-    private Integer quantidadeIngresso;
     @Column(name = "preco_ingresso", nullable = false)
     private Double precoIngresso;
     @Column(name = "code_ticket", nullable = false)
     private UUID ticketCode = UUID.randomUUID();
+
+    @ManyToOne
+    private Event event;
 
     public Integer getIdIngresso() {
         return idIngresso;
@@ -31,14 +32,6 @@ public class Ticket {
 
     public void setIdIngresso(Integer idIngresso) {
         this.idIngresso = idIngresso;
-    }
-
-    public Integer getQuantidadeIngresso() {
-        return quantidadeIngresso;
-    }
-
-    public void setQuantidadeIngresso(Integer quantidadeIngresso) {
-        this.quantidadeIngresso = quantidadeIngresso;
     }
 
     public Double getPrecoIngresso() {

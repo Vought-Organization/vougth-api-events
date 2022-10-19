@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -21,7 +22,6 @@ public class User {
     @Column(name = "user_name", nullable = false)
     private String userName;
 
-
     @Column(name = "email", nullable = false)
     @Email
     private String email;
@@ -34,6 +34,16 @@ public class User {
 
     @Column(name = "nickname", nullable = false)
     private String nickname;
+
+    @CPF
+    private String cpf;
+
+    private String telefone;
+
+    private String cep;
+
+    @ManyToOne
+    private Event event;
 
     public Integer getIdUser() {
         return idUser;
