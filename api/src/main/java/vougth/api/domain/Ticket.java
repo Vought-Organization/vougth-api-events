@@ -22,8 +22,6 @@ public class Ticket {
     private Double precoIngresso;
     @Column(name = "code_ticket", nullable = false)
     private UUID ticketCode = UUID.randomUUID();
-    @ManyToOne
-    private Event event;
 
     public UUID getTicketCode() {
         return ticketCode;
@@ -32,17 +30,7 @@ public class Ticket {
     public void setTicketCode(UUID ticketCode) {
         this.ticketCode = ticketCode;
     }
-
-    public Event getEvent() {
-        return event;
-    }
-
-    public void setEvent(Event event) {
-        this.event = event;
-    }
-
-    @ManyToOne
-    private Event event;
+    
 
     public Integer getIdIngresso() {
         return idIngresso;

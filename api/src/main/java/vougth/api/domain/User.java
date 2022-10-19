@@ -41,17 +41,6 @@ public class User {
 
     private String cep;
 
-    @ManyToOne
-    private Event event;
-
-    public Event getEvent() {
-        return event;
-    }
-
-    public void setEvent(Event event) {
-        this.event = event;
-    }
-
     public Integer getIdUser() {
         return idUser;
     }
