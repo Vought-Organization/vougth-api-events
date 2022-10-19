@@ -41,6 +41,9 @@ public class Ticket {
         this.event = event;
     }
 
+    @ManyToOne
+    private Event event;
+
     public Integer getIdIngresso() {
         return idIngresso;
     }

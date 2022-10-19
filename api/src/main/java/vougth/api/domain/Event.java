@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "events")
+@CrossOrigin
 public class Event {
 
     @Id
@@ -38,9 +40,9 @@ public class Event {
     private String city;
     @Column(name = "state")
     private String state;
-    @Column(name = "startData")
+    @Column(name = "startData", nullable = false)
     private String startData;
-    @Column(name = "endData")
+    @Column(name = "endData", nullable = false)
     private String endData;
 
 
