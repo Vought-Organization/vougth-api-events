@@ -35,6 +35,7 @@ public class User {
     @Column(name = "nickname", nullable = false)
     private String nickname;
 
+    @CPF
     private String cpf;
 
     private String telefone;

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import vougth.api.domain.User;
+import vougth.api.dto.CredencialDto;
 import vougth.api.repository.UserRepository;
 
 import java.util.List;
@@ -21,6 +22,10 @@ public class UserController {
         return ResponseEntity.status(201).body(newUser);
     }
 
+    @GetMapping("/credenciais")
+    public ResponseEntity<List<CredencialDto>> getCredenciais(){
+        return ResponseEntity.status(200).body(userRepository.getCredenciais());
+    }
     @GetMapping
     public ResponseEntity<List<User>> getAllUser(){
         List<User> userList = userRepository.findAll();
