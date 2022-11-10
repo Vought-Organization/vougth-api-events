@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import vougth.api.domain.User;
+import vougth.api.dto.UserResponse;
 import vougth.api.repository.UserRepository;
 
 import java.util.List;
@@ -19,6 +20,12 @@ public class UserController {
     public ResponseEntity<User> createUser(@RequestBody User newUser){
         userRepository.save(newUser);
         return ResponseEntity.status(201).body(newUser);
+    }
+
+    @GetMapping("/login")
+    public ResponseEntity<List<UserResponse>> getSimples() {
+        return ResponseEntity.status(200).body(
+                userRepository.getUserResponse());
     }
 
     @GetMapping
