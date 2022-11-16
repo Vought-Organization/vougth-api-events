@@ -41,9 +41,9 @@ public class Event {
     @Column(name = "state")
     private String state;
     @Column(name = "startData", nullable = false)
-    private String startData;
+    private LocalDateTime startData;
     @Column(name = "endData", nullable = false)
-    private String endData;
+    private LocalDateTime endData;
 
 
     public Integer getIdEvent() {
@@ -142,19 +142,19 @@ public class Event {
         this.state = state;
     }
 
-    public String getStartData() {
+    public LocalDateTime getStartData() {
         return startData;
     }
 
-    public void setStartData(String startData) {
+    public void setStartData(LocalDateTime startData) {
         this.startData = startData;
     }
 
-    public String getEndData() {
+    public LocalDateTime getEndData() {
         return endData;
     }
 
-    public void setEndData(String endData) {
+    public void setEndData(LocalDateTime endData) {
         this.endData = endData;
     }
 }
