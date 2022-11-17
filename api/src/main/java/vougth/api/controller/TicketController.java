@@ -45,14 +45,5 @@ public class TicketController {
         return ResponseEntity.status(404).build();
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Ticket> updateTicketById(@PathVariable int id, @RequestBody Ticket updatedTicket){
-        if (ticketRepository.existsById(id)){
-            updatedTicket.setIdIngresso(id);
-            ticketRepository.save(updatedTicket);
-            return ResponseEntity.status(200).body(updatedTicket);
-        }
-        return ResponseEntity.status(404).build();
-    }
 }
 

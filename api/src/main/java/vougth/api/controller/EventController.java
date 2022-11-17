@@ -25,7 +25,7 @@ public class EventController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Event>> getAllUser(){
+    public ResponseEntity<List<Event>> getAllEvent(){
         List<Event> eventList = eventRepository.findAll();
         return eventList.isEmpty()
                 ? ResponseEntity.status(204).build()
