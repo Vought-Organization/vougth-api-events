@@ -35,7 +35,10 @@ public class User {
     @Column(name = "nickname", nullable = false)
     private String nickname;
 
+    @CPF
     private String cpf;
+
+    private boolean organize;
 
     private String telefone;
 
@@ -111,5 +114,13 @@ public class User {
 
     public void setCep(String cep) {
         this.cep = cep;
+    }
+
+    public boolean isOrganize() {
+        return organize;
+    }
+
+    public void setOrganize(boolean organize) {
+        this.organize = organize;
     }
 }

@@ -20,6 +20,7 @@ public class EventController {
 
     @PostMapping
     public ResponseEntity<Event> createEvent(@RequestBody Event newEvent){
+        newEvent.getUser().setOrganize(true);
         eventRepository.save(newEvent);
         return ResponseEntity.status(201).body(newEvent);
     }
