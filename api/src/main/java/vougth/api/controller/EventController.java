@@ -4,17 +4,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import vougth.api.domain.Event;
+import vougth.api.domain.EventUser;
 import vougth.api.domain.User;
 import vougth.api.repository.EventRepository;
+import vougth.api.repository.EventUserRepository;
 import vougth.api.repository.UserRepository;
+import vougth.api.uteis.FilaObj;
+import vougth.api.uteis.PilhaObj;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("v1/events")
 @CrossOrigin
 public class EventController {
-
     @Autowired
     private EventRepository eventRepository;
 
@@ -55,6 +59,32 @@ public class EventController {
             return ResponseEntity.status(200).body(updatedEvent);
         }
         return ResponseEntity.status(404).build();
+    }
+
+    // Endpoint que busca os ultimos eventos inseridos no banco pela quantidade solicitada
+    @GetMapping("qttd/{qttd}")
+    public ResponseEntity findByQttd(@PathVariable Integer qttd){
+        List<Event> eventos = eventRepository.findAll();
+        List<Event> ultimosEventos = new ArrayList<>();
+
+        if (!eventos.isEmpty()){
+            if (eventos.size() <= qttd){
+                return ResponseEntity.status(200).body(eventos);
+            }
+
+            PilhaObj<Event> ultimosRegistrosPilha = new PilhaObj<>(eventos.size());
+
+            for (Integer i = eventos.size() - 1; i > eventos.size() - qttd - 1; i--){
+                ultimosRegistrosPilha.push(eventos.get(i));
+            }
+
+            for (Integer i = 0; i < qttd; i++){
+                ultimosEventos.add(ultimosRegistrosPilha.pop());
+            }
+
+            return ResponseEntity.status(200).body(ultimosEventos);
+        }
+        return ResponseEntity.status(204).build();
     }
 }
 
