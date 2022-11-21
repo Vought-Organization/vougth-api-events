@@ -52,33 +52,4 @@ class UserControllerTest {
         assertTrue(listUser.getBody().size() > 0);
     }
 
-    @Test
-    @DisplayName("Não retorna lista de users login e retorna o status 204")
-    void retornaSimplesComFalha(){
-
-        when(repository.getUserResponse()).thenReturn(new ArrayList<>());
-
-        ResponseEntity<List<UserResponse>> listUser =
-                controller.getSimples();
-
-        assertEquals(204, listUser.getStatusCodeValue());
-        assertNull(listUser.getBody());
-    }
-
-    @Test
-    @DisplayName("Retorna lista de users e retorna o status 200")
-    void retornaSimplesComSucesso(){
-
-        when(repository.getUserResponse()).thenReturn(List.of(
-                new UserResponse("Test", "1234"),
-                new UserResponse("Test", "1234")
-        ));
-
-        ResponseEntity<List<UserResponse>> listUser =
-                controller.getSimples();
-
-        assertEquals(200, listUser.getStatusCodeValue());
-        assertTrue(listUser.getBody().size() > 0);
-    }
-
 }
