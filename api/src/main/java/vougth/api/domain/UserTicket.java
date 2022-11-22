@@ -6,8 +6,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-public class EventTicket {
-
+public class UserTicket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idEventTicket;
@@ -16,7 +15,7 @@ public class EventTicket {
     private LocalDateTime dataHoraAvaliacao;
 
     @ManyToOne
-    private Event event;
+    private User user;
 
     @ManyToOne
     private Ticket ticket;
@@ -39,12 +38,12 @@ public class EventTicket {
         this.dataHoraAvaliacao = dataHoraAvaliacao;
     }
 
-    public Event getEvent() {
-        return event;
+    public User getUser() {
+        return user;
     }
 
-    public void setEvent(Event event) {
-        this.event = event;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Ticket getTicket() {

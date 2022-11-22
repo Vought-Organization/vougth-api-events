@@ -8,29 +8,28 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-import vougth.api.domain.EventTicket;
-import vougth.api.exception.EventNotFound;
-import vougth.api.repository.EventRepository;
-import vougth.api.repository.EventTicketRepository;
+import vougth.api.domain.UserTicket;
 import vougth.api.repository.TicketRepository;
+import vougth.api.repository.UserRepository;
+import vougth.api.repository.UserTicketRepository;
 import vougth.api.request.NewBuy;
 
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("event/ticket")
-public class EventTicketController {
+@RequestMapping("user/ticket")
+public class UserTicketController {
     @Autowired
-    private EventTicketRepository eventTicketRepository;
+    private UserTicketRepository userTicketRepository;
 
     @Autowired
-    private EventRepository eventRepository;
+    private UserRepository userRepository;
 
     @Autowired
     private TicketRepository ticketRepository;
 
     @PostMapping
-    public ResponseEntity<EventTicket> post(
+    public ResponseEntity<UserTicket> post(
             @RequestBody @Valid
             NewBuy newBuy
     ) {
@@ -43,7 +42,7 @@ public class EventTicketController {
                     HttpStatus.NOT_FOUND,
                     "Ticket não encontrado");
         }
-        if (!eventRepository.existsById(newBuy.getIdEvent())) {
+        if (!userRepository.existsById(newBuy.getIdUser())) {
 /*
 Como a MotoristaNaoExisteException está anotada com @ResponseStatus,
 O StringBoot vai usar o status de resposta e mensagem
@@ -52,16 +51,16 @@ configurados nela
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event não encontrado");
         }
 
-        EventTicket newEventTicket = new EventTicket();
+        UserTicket newUserTicket = new UserTicket();
 
-        newEventTicket.setTicket(
-                ticketRepository.findById(newEventTicket.getTicket().getIdTicket()).get());
-        newEventTicket.setEvent(
-                eventRepository.findById(newEventTicket.getEvent().getIdEvent()).get());
+        newUserTicket.setTicket(
+                ticketRepository.findById(newUserTicket.getTicket().getIdTicket()).get());
+        newUserTicket.setUser(
+                userRepository.findById(newUserTicket.getUser().getIdUser()).get());
 
-        newEventTicket.setApproved(newBuy.isApproved());
-        eventTicketRepository.save(newEventTicket);
+        newUserTicket.setApproved(newBuy.isApproved());
+        userTicketRepository.save(newUserTicket);
 
-        return ResponseEntity.status(201).body(newEventTicket);
+        return ResponseEntity.status(201).body(newUserTicket);
     }
 }

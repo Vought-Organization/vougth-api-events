@@ -23,6 +23,9 @@ public class Ticket {
     @Column(name = "code_ticket", nullable = false)
     private UUID ticketCode = UUID.randomUUID();
 
+    @OneToOne
+    private Event event;
+
     public UUID getTicketCode() {
         return ticketCode;
     }
@@ -54,5 +57,17 @@ public class Ticket {
 
     public void setUuid(UUID uuid) {
         this.ticketCode = uuid;
+    }
+
+    public void setIdTicket(Integer idTicket) {
+        this.idTicket = idTicket;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
     }
 }

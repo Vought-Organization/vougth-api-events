@@ -5,14 +5,14 @@ import javax.validation.constraints.Min;
 
 public class NewBuy {
 
-    private int idEvent;
+    private int idUser;
 
     private int idTicket;
 
     private boolean approved;
 
-    public int getIdEvent() {
-        return idEvent;
+    public int getIdUser() {
+        return idUser;
     }
 
     public int getIdTicket() {
