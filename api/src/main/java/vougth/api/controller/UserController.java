@@ -23,9 +23,12 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public ResponseEntity<List<UserResponse>> getSimples() {
-        return ResponseEntity.status(200).body(
-                userRepository.getUserResponse());
+    public ResponseEntity<List<UserResponse>> getLogin() {
+        List<UserResponse> userResponses = userRepository.getUserResponse();
+        if (userResponses.isEmpty()){
+            return ResponseEntity.status(204).build();
+        }
+        return ResponseEntity.status(200).body(userResponses);
     }
 
     @GetMapping

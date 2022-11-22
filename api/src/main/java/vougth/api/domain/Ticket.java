@@ -17,7 +17,7 @@ public class Ticket {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idIngresso;
+    private Integer idTicket;
     @Column(name = "preco_ingresso", nullable = false)
     private Double precoIngresso;
     @Column(name = "code_ticket", nullable = false)
@@ -32,12 +32,12 @@ public class Ticket {
     }
     
 
-    public Integer getIdIngresso() {
-        return idIngresso;
+    public Integer getIdTicket() {
+        return idTicket;
     }
 
     public void setIdIngresso(Integer idIngresso) {
-        this.idIngresso = idIngresso;
+        this.idTicket = idIngresso;
     }
 
     public Double getPrecoIngresso() {
