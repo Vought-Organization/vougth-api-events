@@ -26,6 +26,10 @@ public class Event {
     private String cep;
     @Column(name = "name_event")
     private String nameEvent;
+
+    @Column(name = "profile_photo")
+    private String photoProfile;
+
     @Column(name = "category_event")
     private String categoryEvent;
     @Column(name = "description")
@@ -157,6 +161,13 @@ public class Event {
         this.endData = endData;
     }
 
+    public String getPhotoProfile() {
+        return photoProfile;
+    }
+
+    public void setPhotoProfile(String photoProfile) {
+        this.photoProfile = photoProfile;
+    }
 }
 
 
