@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import vougth.api.domain.User;
-import vougth.api.dto.UserResponse;
+import vougth.api.response.UserResponse;
 import vougth.api.repository.UserRepository;
 
 import java.util.List;

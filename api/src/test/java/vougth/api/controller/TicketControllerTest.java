@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.ResponseEntity;
-import vougth.api.domain.Event;
 import vougth.api.domain.Ticket;
-import vougth.api.domain.User;
-import vougth.api.dto.UserResponse;
 import vougth.api.repository.TicketRepository;
 
 import java.util.ArrayList;

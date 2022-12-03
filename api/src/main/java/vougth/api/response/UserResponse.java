@@ -1,4 +1,4 @@
-package vougth.api.dto;
+package vougth.api.response;
 
 public class UserResponse {
 
