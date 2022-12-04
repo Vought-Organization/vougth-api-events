@@ -9,6 +9,10 @@ public class ListObj <T>{
         nroElem = 0;
     }
 
+    public boolean isEmpty() {
+        return nroElem == 0;
+    }
+
     public boolean adicionar(T elemento) {
         if (nroElem >= vetor.length) {
             System.out.println("A lista está cheia");

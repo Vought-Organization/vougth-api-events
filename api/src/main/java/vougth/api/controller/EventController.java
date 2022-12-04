@@ -28,6 +28,9 @@ public class EventController {
     @Autowired
     private EventRepository eventRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @PostMapping
     public ResponseEntity<Event> createEvent(@RequestBody Event newEvent) {
 //        newEvent.getUser().setOrganize(true);
@@ -97,67 +100,93 @@ public class EventController {
     public ResponseEntity gravaArquivoTxt() {
 
         List<Event> events = eventRepository.findAll();
+        List<User>  users = userRepository.findAll();
 
         if (!events.isEmpty()) {
 
             int contaRegDados = 0;      // contador de registros de dados (para poder gravar no trailer)
 
             // Monta o registro de header
-            String header = "eventos ";
+            String header = "eventos e usuarios ";
             Date dataDeHoje = new Date();       // Data e hora do momento, no formato padrão do Java
             SimpleDateFormat formataData = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");     // configura o padrão de formatação da data e horário
             header += formataData.format(dataDeHoje);   // Formata a data e hora para o padrão desejado
             header += "01";
 
             // Grava o header
-            TxtAdapter.gravaRegistro(header, "eventos.txt");
+            TxtAdapter.gravaRegistro(header, "eventos-usuarios.txt");
 
 
             for (Event t : events) {
                 String corpo = "02 ";
                 corpo += String.format("%03d ", t.getIdEvent());
-                corpo += String.format("%-15.15s", t.getNameEvent());
+                corpo += String.format("%-40.40s", t.getNameEvent());
                 corpo += String.format("%-10.10s", t.getCep());
                 corpo += String.format("%-10.10s", t.getCategoryEvent());
                 corpo += String.format("%-50.50s", t.getAddressEvent());
                 corpo += String.format("\n");
-                corpo += String.format("%-10.10s", t.getDescription());
+                corpo += String.format("%-25.25s", t.getDescription());
                 corpo += String.format("%-30.30s", t.getCity());
                 corpo += String.format("%-20.20s", t.getState());
-                corpo += String.format("%-15.15s", t.getStartData());
-                corpo += String.format("%-15.15s", t.getEndData());
+                corpo += String.format("%-20.20s", t.getStartData());
+                corpo += String.format("%-20.20s", t.getEndData());
 
                 // Incrementa o contador de registro de dados
                 contaRegDados++;
 
                 // Grava o registro de corpo no arquivo
-                TxtAdapter.gravaRegistro(corpo, "eventos.txt");
+                TxtAdapter.gravaRegistro(corpo, "eventos-usuarios.txt");
+            }
+
+            for (User u : users) {
+                String corpo = "02 ";
+                corpo += String.format("%03d ", u.getIdUser());
+                corpo += String.format("%-40.40s", u.getUserName());
+                corpo += String.format("%-40.40s", u.getEmail());
+                corpo += String.format("%-10.10s", u.getNickname());
+                corpo += String.format("%-20.20s", u.getCpf());
+                corpo += String.format("\n");
+                corpo += String.format("%-15.15s", u.getTelefone());
+                corpo += String.format("%-20.20s", u.getCep());
+                corpo += String.format("%-10.10s", u.isOrganize());
+
+                // Incrementa o contador de registro de dados
+                contaRegDados++;
+
+                // Grava o registro de corpo no arquivo
+                TxtAdapter.gravaRegistro(corpo, "eventos-usuarios.txt");
             }
 
             // Monta e grava o registro de trailer
             String trailer = "01 ";
             trailer += String.format("%010d", contaRegDados);   // contador de registros de dados
-            TxtAdapter.gravaRegistro(trailer, "eventos.txt");
+            TxtAdapter.gravaRegistro(trailer, "eventos-usuarios.txt");
 
             return ResponseEntity.status(201).build();
         }
         return ResponseEntity.status(204).build();
     }
 
-    // Endpoint para fazer o export do TXT de tatuadores
+    // Endpoint para fazer o export do TXT de eventos
     @GetMapping("/export-eventos")
     public void getEventsTxt(HttpServletResponse response) throws IOException {
 
         List<Event> listaJava = eventRepository.findAll();
+        List<User> listaJavaUser = userRepository.findAll();
 
         ListObj<Event> lista = new ListObj<>(listaJava.size());
+        ListObj<User> listaUser = new ListObj<>(listaJavaUser.size());
 
         for (int i = 0; i < eventRepository.count(); i++) {
             lista.adicionar(listaJava.get(i));
         }
 
-        TxtAdapter.downloadTxtEvent(response.getWriter(), lista);
-        response.setHeader("Content-Disposition", "attachment; filename=" + "eventos.txt");
+        for (int i = 0; i < userRepository.count(); i++) {
+            listaUser.adicionar(listaJavaUser.get(i));
+        }
+
+        TxtAdapter.downloadTxtEvent(response.getWriter(), lista, listaUser);
+        response.setHeader("Content-Disposition", "attachment; filename=" + "events-users.txt");
         response.setStatus(200);
     }
 }

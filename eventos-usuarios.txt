@@ -1,0 +1,96 @@
+eventos e usuarios 04-12-2022 01:46:2801
+02 030 Evento SPTECH  01414-905           Jardim Brasil (Zona Norte), Rua Álvaro dos Santos
+          São Paulo                     SP                  2022-11-18T13:22022-11-26T13:2
+02 032 Evento legal   02227-210           Jardim Brasil (Zona Norte), Rua Álvaro dos Santos 
+          São Paulo                     SP                  2022-12-02T19:22022-12-10T19:2
+02 035 Evento legal   02227-210 Rave      Jardim Brasil (Zona Norte), Rua Álvaro dos Santos 
+Este é um São Paulo                     SP                  2022-11-30T18:12022-12-03T18:1
+02 037 EVENTO MUITO GR02227-210 Rave      Jardim Brasil (Zona Norte), Rua Álvaro dos Santos 
+Este é um São Paulo                     SP                  2022-12-24T16:02022-12-24T21:3
+02 040 Rafael         02227-210 Rafael    Jardim Brasil (Zona Norte), Rua Álvaro dos Santos 
+rafae     São Paulo                     SP                  2022-12-23T17:02022-12-24T17:0
+02 041 Rafael         02227-210 Rafael    Jardim Brasil (Zona Norte), Rua Álvaro dos Santos 
+rafae     São Paulo                     SP                  2022-12-30T18:42023-01-06T18:5
+02 002 derlizera      deusfezassim@hotmail.com                derlizera 12312312322         
+telefone       01208000            true
+     
+02 006 Isaque         isaque@gmail.com                                  78535332090         
+1199989283     121200123           true
+     
+02 007 Isaque         isaque@gmail.com                                  78535332090         
+1199989283     121200123           true
+     
+02 017 derli          derli@gmail.com                                   78535332090         
+1199293423     01041000            true
+     
+02 018 derli          grupo9@gmail.com                                  191.488.340-33      
+119992839      01041000            false
+    
+02 019 Cadastro       cadastro@cadastro.com                             191.488.340-33      
+122331         012100023           false
+    
+01 0000000012
+eventos e usuarios 04-12-2022 01:49:1301
+02 030 Evento SPTECH  01414-905           Jardim Brasil (Zona Norte), Rua Álvaro dos Santos 
+          São Paulo                     SP                  2022-11-18T13:22022-11-26T13:2
+02 032 Evento legal   02227-210           Jardim Brasil (Zona Norte), Rua Álvaro dos Santos 
+          São Paulo                     SP                  2022-12-02T19:22022-12-10T19:2
+02 035 Evento legal   02227-210 Rave      Jardim Brasil (Zona Norte), Rua Álvaro dos Santos 
+Este é um São Paulo                     SP                  2022-11-30T18:12022-12-03T18:1
+02 037 EVENTO MUITO GR02227-210 Rave      Jardim Brasil (Zona Norte), Rua Álvaro dos Santos 
+Este é um São Paulo                     SP                  2022-12-24T16:02022-12-24T21:3
+02 040 Rafael         02227-210 Rafael    Jardim Brasil (Zona Norte), Rua Álvaro dos Santos 
+rafae     São Paulo                     SP                  2022-12-23T17:02022-12-24T17:0
+02 041 Rafael         02227-210 Rafael    Jardim Brasil (Zona Norte), Rua Álvaro dos Santos 
+rafae     São Paulo                     SP                  2022-12-30T18:42023-01-06T18:5
+02 002 derlizera      deusfezassim@hotmail.com                derlizera 12312312322         
+telefone       01208000            true
+     
+02 006 Isaque         isaque@gmail.com                                  78535332090         
+1199989283     121200123           true
+     
+02 007 Isaque         isaque@gmail.com                                  78535332090         
+1199989283     121200123           true
+     
+02 017 derli          derli@gmail.com                                   78535332090         
+1199293423     01041000            true
+     
+02 018 derli          grupo9@gmail.com                                  191.488.340-33      
+119992839      01041000            false
+    
+02 019 Cadastro       cadastro@cadastro.com                             191.488.340-33      
+122331         012100023           false
+    
+01 0000000012
+eventos e usuarios 04-12-2022 01:49:3701
+02 030 Evento SPTECH  01414-905           Jardim Brasil (Zona Norte), Rua Álvaro dos Santos 
+          São Paulo                     SP                  2022-11-18T13:22022-11-26T13:2
+02 032 Evento legal   02227-210           Jardim Brasil (Zona Norte), Rua Álvaro dos Santos 
+          São Paulo                     SP                  2022-12-02T19:22022-12-10T19:2
+02 035 Evento legal   02227-210 Rave      Jardim Brasil (Zona Norte), Rua Álvaro dos Santos 
+Este é um São Paulo                     SP                  2022-11-30T18:12022-12-03T18:1
+02 037 EVENTO MUITO GR02227-210 Rave      Jardim Brasil (Zona Norte), Rua Álvaro dos Santos 
+Este é um São Paulo                     SP                  2022-12-24T16:02022-12-24T21:3
+02 040 Rafael         02227-210 Rafael    Jardim Brasil (Zona Norte), Rua Álvaro dos Santos 
+rafae     São Paulo                     SP                  2022-12-23T17:02022-12-24T17:0
+02 041 Rafael         02227-210 Rafael    Jardim Brasil (Zona Norte), Rua Álvaro dos Santos 
+rafae     São Paulo                     SP                  2022-12-30T18:42023-01-06T18:5
+02 002 derlizera      deusfezassim@hotmail.com                derlizera 12312312322         
+telefone       01208000            true
+     
+02 006 Isaque         isaque@gmail.com                                  78535332090         
+1199989283     121200123           true
+     
+02 007 Isaque         isaque@gmail.com                                  78535332090         
+1199989283     121200123           true
+     
+02 017 derli          derli@gmail.com                                   78535332090         
+1199293423     01041000            true
+     
+02 018 derli          grupo9@gmail.com                                  191.488.340-33      
+119992839      01041000            false
+    
+02 019 Cadastro       cadastro@cadastro.com                             191.488.340-33      
+122331         012100023           false
+    
+01 0000000012
