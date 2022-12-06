@@ -94,3 +94,23 @@ telefone       01208000            true
 122331         012100023           false
     
 01 0000000012
+eventos e usuarios 04-12-2022 18:10:4301
+02 042 Evento SPTECH                           02224-010 Passeio   Jardim Brasil (Zona Norte), Avenida Major Roberto 
+Um centro de cultura, turSão Paulo                     SP                  2022-12-31T16:46    2022-12-30T20:29    
+02 002 derlizera                               deusfezassim@hotmail.com                derlizera 12312312322         
+telefone       01208000            true      
+02 006 Isaque                                  isaque@gmail.com                                  78535332090         
+1199989283     121200123           true      
+02 007 Isaque                                  isaque@gmail.com                                  78535332090         
+1199989283     121200123           true      
+02 017 derli                                   derli@gmail.com                                   78535332090         
+1199293423     01041000            true      
+02 018 derli                                   grupo9@gmail.com                                  191.488.340-33      
+119992839      01041000            false     
+02 019 Cadastro                                cadastro@cadastro.com                             191.488.340-33      
+122331         012100023           false     
+02 020 Rafael Barbosa Silva                    barbosarafael447@gmail.com                        36477469839         
+11941318292    02227-210           true      
+02 021 Rafael Barbosa SIlva                    rafael@gmail.com                                  36477469839         
+11941318292    02227-210           false     
+01 0000000009

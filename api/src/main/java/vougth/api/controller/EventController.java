@@ -186,7 +186,7 @@ public class EventController {
         }
 
         TxtAdapter.downloadTxtEvent(response.getWriter(), lista, listaUser);
-        response.setHeader("Content-Disposition", "attachment; filename=" + "events-users.txt");
+        response.setHeader("Content-type: application/force-download, Content-Disposition", "attachment; filename=" + "eventos-usuarios.txt");
         response.setStatus(200);
     }
 }
