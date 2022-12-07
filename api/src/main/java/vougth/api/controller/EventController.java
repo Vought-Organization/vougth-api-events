@@ -189,5 +189,30 @@ public class EventController {
         response.setHeader("Content-type: application/force-download, Content-Disposition", "attachment; filename=" + "eventos-usuarios.txt");
         response.setStatus(200);
     }
+
+    @GetMapping("fila/{qttd}")
+    public ResponseEntity findByQttdFila(@PathVariable Integer qttd) {
+        List<Event> eventos = eventRepository.findAll();
+        List<Event> ultimosEventos = new ArrayList<>();
+
+        if (!eventos.isEmpty()) {
+            if (eventos.size() <= qttd) {
+                return ResponseEntity.status(200).body(eventos);
+            }
+
+            FilaObj<Event> ultimosRegistrosFila = new FilaObj<>(eventos.size());
+
+            for (Integer i = eventos.size() - 1; i > eventos.size() - qttd - 1; i--) {
+                ultimosRegistrosFila.insert(eventos.get(i));
+            }
+
+            for (Integer i = 0; i < qttd; i++) {
+                ultimosEventos.add(ultimosRegistrosFila.poll());
+            }
+
+            return ResponseEntity.status(200).body(ultimosEventos);
+        }
+        return ResponseEntity.status(204).build();
+    }
 }
 
