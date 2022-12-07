@@ -11,6 +11,7 @@ import vougth.api.repository.UserRepository;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("v1/tickets")
 public class TicketController {
 
@@ -34,6 +35,11 @@ public class TicketController {
     @GetMapping("/{id}")
     public ResponseEntity<Ticket> getTicketById(@PathVariable int id){
         return ResponseEntity.of(ticketRepository.findById(id));
+    }
+
+    @GetMapping("/eventos/{id}")
+    public List<Ticket> getTickets(@PathVariable Integer id) {
+        return ticketRepository.findByCodigoEvento(id);
     }
 
     @DeleteMapping("/{id}")

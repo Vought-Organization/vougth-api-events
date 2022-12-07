@@ -17,13 +17,14 @@ public class Ticket {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idTicket;
+    private Integer idIngresso;
     @Column(name = "preco_ingresso", nullable = false)
     private Double precoIngresso;
     @Column(name = "code_ticket", nullable = false)
     private UUID ticketCode = UUID.randomUUID();
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "EventIdEvent")
     private Event event;
 
     public UUID getTicketCode() {
@@ -33,14 +34,14 @@ public class Ticket {
     public void setTicketCode(UUID ticketCode) {
         this.ticketCode = ticketCode;
     }
-    
+
 
     public Integer getIdTicket() {
-        return idTicket;
+        return idIngresso;
     }
 
     public void setIdIngresso(Integer idIngresso) {
-        this.idTicket = idIngresso;
+        this.idIngresso = idIngresso;
     }
 
     public Double getPrecoIngresso() {
@@ -60,7 +61,7 @@ public class Ticket {
     }
 
     public void setIdTicket(Integer idTicket) {
-        this.idTicket = idTicket;
+        this.idIngresso = idTicket;
     }
 
     public Event getEvent() {
