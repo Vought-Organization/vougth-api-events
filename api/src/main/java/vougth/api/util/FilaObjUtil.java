@@ -1,12 +1,12 @@
-package vougth.api.uteis;
+package vougth.api.util;
 
-public class FilaObj<T> {
+public class FilaObjUtil<T> {
     // Atributos (não alterar)
     private int tamanho;
     private T[] fila;
 
     //Construtor (completar)
-    public FilaObj(int capacidade) {
+    public FilaObjUtil(int capacidade) {
         tamanho = 0;
         fila = (T[]) new Object[capacidade];
     }

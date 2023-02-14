@@ -1,6 +1,6 @@
-package vougth.api.uteis;
+package vougth.api.util;
 
-public class PilhaObj<T> {
+public class PilhaObjUtil<T> {
 
 
     // Atributos (não alterar)
@@ -8,7 +8,7 @@ public class PilhaObj<T> {
     private int topo;
 
     // Construtor (completar)
-    public PilhaObj(int capacidade) {
+    public PilhaObjUtil(int capacidade) {
         pilha = (T[]) new Object[capacidade];
         topo = -1;
     }

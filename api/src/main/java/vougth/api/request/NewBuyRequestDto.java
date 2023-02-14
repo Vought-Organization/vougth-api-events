@@ -1,9 +1,6 @@
 package vougth.api.request;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-
-public class NewBuy {
+public class NewBuyRequestDto {
 
     private int idUser;
 

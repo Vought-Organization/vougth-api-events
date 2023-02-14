@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import vougth.api.domain.User;
-import vougth.api.response.UserResponse;
+import vougth.api.response.UserResponseDto;
 import vougth.api.repository.UserRepository;
 
 import java.util.List;
@@ -24,12 +24,12 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public ResponseEntity<List<UserResponse>> getLogin() {
-        List<UserResponse> userResponses = userRepository.getUserResponse();
-        if (userResponses.isEmpty()){
+    public ResponseEntity<List<UserResponseDto>> getLogin() {
+        List<UserResponseDto> userResponsDtos = userRepository.getUserResponse();
+        if (userResponsDtos.isEmpty()){
             return ResponseEntity.status(204).build();
         }
-        return ResponseEntity.status(200).body(userResponses);
+        return ResponseEntity.status(200).body(userResponsDtos);
     }
 
     @GetMapping

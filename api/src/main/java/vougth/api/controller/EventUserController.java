@@ -9,8 +9,7 @@ import vougth.api.domain.User;
 import vougth.api.repository.EventRepository;
 import vougth.api.repository.EventUserRepository;
 import vougth.api.repository.UserRepository;
-import vougth.api.uteis.FilaObj;
-import org.springframework.web.bind.annotation.*;
+import vougth.api.util.FilaObjUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +32,7 @@ public class EventUserController {
     public ResponseEntity adicionarEstiloTatuador(@PathVariable Integer id_user, @RequestBody List<Integer> id_events ){
         List<EventUser> events = eventUserRepository.findAll();
 
-        FilaObj<Integer> fila = new FilaObj(id_events.size());
+        FilaObjUtil<Integer> fila = new FilaObjUtil(id_events.size());
         for(int x = 0 ; x < id_events.size(); x++){
             fila.insert(id_events.get(x));
         }

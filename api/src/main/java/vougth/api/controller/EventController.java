@@ -4,15 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import vougth.api.domain.Event;
-import vougth.api.domain.EventUser;
 import vougth.api.domain.User;
 import vougth.api.repository.EventRepository;
-import vougth.api.repository.EventUserRepository;
 import vougth.api.repository.UserRepository;
-import vougth.api.uteis.FilaObj;
-import vougth.api.uteis.ListObj;
-import vougth.api.uteis.PilhaObj;
-import vougth.api.uteis.TxtAdapter;
+import vougth.api.util.FilaObjUtil;
+import vougth.api.util.ListObjUtil;
+import vougth.api.util.PilhaObjUtil;
+import vougth.api.util.TxtAdapter;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -81,7 +79,7 @@ public class EventController {
                 return ResponseEntity.status(200).body(eventos);
             }
 
-            PilhaObj<Event> ultimosRegistrosPilha = new PilhaObj<>(eventos.size());
+            PilhaObjUtil<Event> ultimosRegistrosPilha = new PilhaObjUtil<>(eventos.size());
 
             for (Integer i = eventos.size() - 1; i > eventos.size() - qttd - 1; i--) {
                 ultimosRegistrosPilha.push(eventos.get(i));
@@ -174,8 +172,8 @@ public class EventController {
         List<Event> listaJava = eventRepository.findAll();
         List<User> listaJavaUser = userRepository.findAll();
 
-        ListObj<Event> lista = new ListObj<>(listaJava.size());
-        ListObj<User> listaUser = new ListObj<>(listaJavaUser.size());
+        ListObjUtil<Event> lista = new ListObjUtil<>(listaJava.size());
+        ListObjUtil<User> listaUser = new ListObjUtil<>(listaJavaUser.size());
 
         for (int i = 0; i < eventRepository.count(); i++) {
             lista.adicionar(listaJava.get(i));
@@ -200,7 +198,7 @@ public class EventController {
                 return ResponseEntity.status(200).body(eventos);
             }
 
-            FilaObj<Event> ultimosRegistrosFila = new FilaObj<>(eventos.size());
+            FilaObjUtil<Event> ultimosRegistrosFila = new FilaObjUtil<>(eventos.size());
 
             for (Integer i = eventos.size() - 1; i > eventos.size() - qttd - 1; i--) {
                 ultimosRegistrosFila.insert(eventos.get(i));

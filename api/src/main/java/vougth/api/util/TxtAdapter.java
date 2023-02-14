@@ -1,4 +1,4 @@
-package vougth.api.uteis;
+package vougth.api.util;
 
 import vougth.api.domain.Event;
 import vougth.api.domain.User;
@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 public class TxtAdapter {
 
     // Método para fazer o download do Txt dos eventos (Exportação de arquivo)
-    public static void downloadTxtEvent(PrintWriter writer, ListObj<Event> eventos, ListObj<User> users) {
+    public static void downloadTxtEvent(PrintWriter writer, ListObjUtil<Event> eventos, ListObjUtil<User> users) {
 
         for (int i = 0; i < eventos.getTamanho(); i++){
             Event eventTxt  = eventos.getElemento(i);

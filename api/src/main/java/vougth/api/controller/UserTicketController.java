@@ -12,7 +12,7 @@ import vougth.api.domain.UserTicket;
 import vougth.api.repository.TicketRepository;
 import vougth.api.repository.UserRepository;
 import vougth.api.repository.UserTicketRepository;
-import vougth.api.request.NewBuy;
+import vougth.api.request.NewBuyRequestDto;
 
 import javax.validation.Valid;
 
@@ -31,10 +31,10 @@ public class UserTicketController {
     @PostMapping
     public ResponseEntity<UserTicket> post(
             @RequestBody @Valid
-            NewBuy newBuy
+            NewBuyRequestDto newBuyRequestDto
     ) {
 
-        if (!ticketRepository.existsById(newBuy.getIdTicket())) {
+        if (!ticketRepository.existsById(newBuyRequestDto.getIdTicket())) {
             // Aqui lançamos uma exceção (erro) do tipo ResponseStatusException
             // o 1o argumento é o status de resposta
             // o 2o argumento é a mensagem de erro
@@ -42,7 +42,7 @@ public class UserTicketController {
                     HttpStatus.NOT_FOUND,
                     "Ticket não encontrado");
         }
-        if (!userRepository.existsById(newBuy.getIdUser())) {
+        if (!userRepository.existsById(newBuyRequestDto.getIdUser())) {
 /*
 Como a MotoristaNaoExisteException está anotada com @ResponseStatus,
 O StringBoot vai usar o status de resposta e mensagem
@@ -58,7 +58,7 @@ configurados nela
         newUserTicket.setUser(
                 userRepository.findById(newUserTicket.getUser().getIdUser()).get());
 
-        newUserTicket.setApproved(newBuy.isApproved());
+        newUserTicket.setApproved(newBuyRequestDto.isApproved());
         userTicketRepository.save(newUserTicket);
 
         return ResponseEntity.status(201).body(newUserTicket);

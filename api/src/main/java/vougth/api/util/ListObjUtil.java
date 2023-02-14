@@ -1,10 +1,10 @@
-package vougth.api.uteis;
+package vougth.api.util;
 
-public class ListObj <T>{
+public class ListObjUtil<T>{
     private T[] vetor;
     private int nroElem;
 
-    public ListObj(int tamanho) {
+    public ListObjUtil(int tamanho) {
         vetor = (T[]) new Object[tamanho];
         nroElem = 0;
     }

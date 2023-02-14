@@ -1,13 +1,13 @@
 package vougth.api.response;
 
-public class UserResponse {
+public class UserResponseDto {
 
     private Integer idUser;
     private String email;
     private String userName;
     private String password;
 
-    public UserResponse(Integer idUser, String userName, String password, String email) {
+    public UserResponseDto(Integer idUser, String userName, String password, String email) {
         this.idUser = idUser;
         this.userName = userName;
         this.password = password;
