@@ -43,11 +43,6 @@ public class UserTicketController {
                     "Ticket não encontrado");
         }
         if (!userRepository.existsById(newBuyRequestDto.getIdUser())) {
-/*
-Como a MotoristaNaoExisteException está anotada com @ResponseStatus,
-O StringBoot vai usar o status de resposta e mensagem
-configurados nela
- */
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event não encontrado");
         }
 
