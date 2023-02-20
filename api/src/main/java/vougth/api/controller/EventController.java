@@ -1,77 +1,76 @@
 package vougth.api.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import io.swagger.v3.oas.annotations.Operation;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import vougth.api.domain.Event;
 import vougth.api.domain.User;
-import vougth.api.repository.EventRepository;
-import vougth.api.repository.UserRepository;
+import vougth.api.service.EventService;
+import vougth.api.service.UserService;
 import vougth.api.util.FilaObjUtil;
 import vougth.api.util.ListObjUtil;
 import vougth.api.util.PilhaObjUtil;
 import vougth.api.util.TxtAdapter;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("v1/events")
 @CrossOrigin
 public class EventController {
-    @Autowired
-    private EventRepository eventRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final EventService eventService;
+    private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<Event> createEvent(@RequestBody Event newEvent) {
-//        newEvent.getUser().setOrganize(true);
-        eventRepository.save(newEvent);
-        return ResponseEntity.status(201).body(newEvent);
+    @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "Cria Evento")
+    public Event save(@Valid @RequestBody Event newEvent) {
+        return eventService.save(newEvent);
     }
 
     @GetMapping
-    public ResponseEntity<List<Event>> getAllEvent() {
-        List<Event> eventList = eventRepository.findAll();
-        return eventList.isEmpty()
-                ? ResponseEntity.status(204).build()
-                : ResponseEntity.status(200).body(eventList);
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Busca todos os eventos")
+    public List<Event> getAllEvent() {
+        return eventService.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Event> getEventById(@PathVariable int id) {
-        return ResponseEntity.of(eventRepository.findById(id));
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Busca evento pelo id")
+    public Optional<Event> getEventById(@PathVariable int id) {
+        return eventService.findById(id);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteEventById(@PathVariable int id) {
-        if (eventRepository.existsById(id)) {
-            eventRepository.deleteById(id);
-            return ResponseEntity.status(200).build();
-        }
-        return ResponseEntity.status(404).build();
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Deleta evento pelo id")
+    public void deleteEventById(@PathVariable int id) {
+        eventService.delete(id);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Event> updateUserById(@PathVariable int id, @RequestBody Event updatedEvent) {
-        if (eventRepository.existsById(id)) {
-            updatedEvent.setIdEvent(id);
-            eventRepository.save(updatedEvent);
-            return ResponseEntity.status(200).body(updatedEvent);
-        }
-        return ResponseEntity.status(404).build();
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Atualiza evento pelo id e passando novo objeto Evento")
+    public Event updateUserById(@PathVariable int id, @RequestBody Event updatedEvent) {
+        return eventService.update(id, updatedEvent);
     }
 
     // Endpoint que busca os ultimos eventos inseridos no banco pela quantidade solicitada
     @GetMapping("qttd/{qttd}")
     public ResponseEntity findByQttd(@PathVariable Integer qttd) {
-        List<Event> eventos = eventRepository.findAll();
+        List<Event> eventos = eventService.findAll();
         List<Event> ultimosEventos = new ArrayList<>();
 
         if (!eventos.isEmpty()) {
@@ -95,10 +94,11 @@ public class EventController {
     }
 
     @GetMapping("/import-eventos")
+    @Operation(summary = "Importa os eventos para nossa base de dados")
     public ResponseEntity gravaArquivoTxt() {
 
-        List<Event> events = eventRepository.findAll();
-        List<User>  users = userRepository.findAll();
+        List<Event> events = eventService.findAll();
+        List<User> users = userService.findAll();
 
         if (!events.isEmpty()) {
 
@@ -167,19 +167,20 @@ public class EventController {
 
     // Endpoint para fazer o export do TXT de eventos
     @GetMapping("/export-eventos")
+    @Operation(summary = "Download do CSV dos Eventos e dos Usuários")
     public void getEventsTxt(HttpServletResponse response) throws IOException {
 
-        List<Event> listaJava = eventRepository.findAll();
-        List<User> listaJavaUser = userRepository.findAll();
+        List<Event> listaJava = eventService.findAll();
+        List<User> listaJavaUser = userService.findAll();
 
         ListObjUtil<Event> lista = new ListObjUtil<>(listaJava.size());
         ListObjUtil<User> listaUser = new ListObjUtil<>(listaJavaUser.size());
 
-        for (int i = 0; i < eventRepository.count(); i++) {
+        for (int i = 0; i < eventService.count(); i++) {
             lista.adicionar(listaJava.get(i));
         }
 
-        for (int i = 0; i < userRepository.count(); i++) {
+        for (int i = 0; i < userService.count(); i++) {
             listaUser.adicionar(listaJavaUser.get(i));
         }
 
@@ -189,8 +190,9 @@ public class EventController {
     }
 
     @GetMapping("fila/{qttd}")
+    @Operation(summary = "Busca os últimos eventos postados")
     public ResponseEntity findByQttdFila(@PathVariable Integer qttd) {
-        List<Event> eventos = eventRepository.findAll();
+        List<Event> eventos = eventService.findAll();
         List<Event> ultimosEventos = new ArrayList<>();
 
         if (!eventos.isEmpty()) {
