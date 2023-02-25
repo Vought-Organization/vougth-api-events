@@ -18,15 +18,18 @@ public class UserController {
     @Autowired private UserService userService;
 
     @PostMapping @ResponseStatus(HttpStatus.CREATED) @Operation(summary = "Cadastra um usuário")
-    public ResponseEntity<User> createUser(@RequestBody User newUser){ return userService.createUser(newUser); }
+    public ResponseEntity<User> createUser(@RequestBody User newUser){
+        return userService.createUser(newUser);
+    }
 
     @GetMapping("/login") @ResponseStatus(HttpStatus.OK) @Operation(summary = "Executa o Login")
-    public ResponseEntity<List<UserResponseDto>> getLogin() { return userService.getLogin(); }
+    public ResponseEntity<List<UserResponseDto>> getLogin() {
+        return userService.getLogin();
+    }
 
     @GetMapping @ResponseStatus(HttpStatus.OK) @Operation(summary = "Lista todos os usuários")
-    public ResponseEntity<List<User>> getAllUser(){
-        List<User> userList = userRepository.findAll();
-        return userList.isEmpty() ? ResponseEntity.status(204).build() : ResponseEntity.status(200).body(userList);
+    public ResponseEntity<List<User>> getAllUsers(){
+        return userService.getAllUsers();
     }
 
     @GetMapping("/{id}") @ResponseStatus(HttpStatus.OK) @Operation(summary = "Busca um usuário específico")

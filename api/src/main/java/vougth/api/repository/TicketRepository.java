@@ -10,7 +10,6 @@ import java.util.List;
 
 @Repository
 public interface TicketRepository extends JpaRepository<Ticket, Integer> {
-
     @Query("SELECT t FROM Ticket t WHERE t.event.idEvent = :idEvent")
-    List<Ticket> findByCodigoEvento(@Param("idEvent") Integer idEvent);
+    List<Ticket> findByEventCode(@Param("idEvent") Integer idEvent);
 }
