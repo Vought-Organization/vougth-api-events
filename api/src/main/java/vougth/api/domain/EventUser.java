@@ -14,11 +14,11 @@ public class EventUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer id_event;
-    private Integer id_user;
+    private Integer idEvent;
+    private Integer idUser;
 
-    public EventUser(Integer id_event, Integer id_user) {
-        this.id_user = id_user;
-        this.id_event = id_event;
+    public EventUser(Integer idEvent, Integer idUser) {
+        this.idUser = idUser;
+        this.idEvent = idEvent;
     }
 }

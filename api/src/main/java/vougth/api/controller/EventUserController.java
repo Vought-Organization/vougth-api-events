@@ -9,6 +9,7 @@ import vougth.api.domain.User;
 import vougth.api.repository.EventRepository;
 import vougth.api.repository.EventUserRepository;
 import vougth.api.repository.UserRepository;
+import vougth.api.service.EventUserService;
 import vougth.api.util.FilaObjUtil;
 
 import java.util.ArrayList;
@@ -19,97 +20,30 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/user-events")
 public class EventUserController {
-    @Autowired
-    private EventUserRepository eventUserRepository;
+    @Autowired private EventUserService eventUserService;
 
-    @Autowired
-    private EventRepository eventRepository;
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @PostMapping("/atualiza-eventos/{id_user}")
-    public ResponseEntity adicionarEstiloTatuador(@PathVariable Integer id_user, @RequestBody List<Integer> id_events ){
-        List<EventUser> events = eventUserRepository.findAll();
-
-        FilaObjUtil<Integer> fila = new FilaObjUtil(id_events.size());
-        for(int x = 0 ; x < id_events.size(); x++){
-            fila.insert(id_events.get(x));
-        }
-
-        for(int x = 0; x < events.size(); x++){
-            if(events.get(x).getId_user() != null){
-                if(events.get(x).getId_user().equals(id_user)) {
-                    deletaEventUser(events.get(x).getId());
-                }
-            }
-        }
-
-        for(int x = 0; x < id_events.size() ; x++){
-            EventUser eventUser = new EventUser(id_user, fila.poll());
-            eventUserRepository.save(eventUser);
-        }
-        return ResponseEntity.status(201).build();
+    @PostMapping("/update-events/{id_user}")
+    public ResponseEntity<Void> addEventUser(@PathVariable Integer id_user, @RequestBody List<Integer> id_events ) {
+        return eventUserService.addEventUser(id_user, id_events);
     }
 
-    @DeleteMapping(path ={"/{id}"})
-    public ResponseEntity <?> deletaEventUser(@PathVariable Integer id) {
-        if (eventUserRepository.existsById(id)){
-            eventUserRepository.deleteById(id);
-            return ResponseEntity.status(200).build();
-        }
-
-        return ResponseEntity.status(404).build();
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteEventUser(@PathVariable Integer id) {
+        return eventUserService.deleteEventUser(id);
     }
 
-    @GetMapping("/")
-    public ResponseEntity findAllEventUser(){
-        List<EventUser> lista = eventUserRepository.findAll();
-        if(lista.isEmpty()) return ResponseEntity.status(204).build();
-        return ResponseEntity.status(200).body(lista);
+    @GetMapping
+    public ResponseEntity<List<EventUser>> findAllEventsUser() {
+        return eventUserService.findAllEventsUser();
     }
 
     @GetMapping("/id-user/{id}")
-    public ResponseEntity findEventByIdUser(@PathVariable Integer id){
-        List<EventUser> eventUsers = eventUserRepository.findAll();
-        List<Integer> idEvents = new ArrayList<>();
-        List<Optional<Event>> userEvent = new ArrayList<>();
-
-        for(int x = 0; x < eventUsers.size(); x++){
-            if(eventUsers.get(x).getId_user().equals(id)){
-                idEvents.add(eventUsers.get(x).getId_event());
-            }
-        }
-
-        for(Integer idEvent : idEvents){
-            Optional<Event> event = eventRepository.findById(idEvent);
-            userEvent.add(event);
-        }
-
-        if(userEvent.isEmpty()) return ResponseEntity.status(204).build();
-        return ResponseEntity.status(200).body(userEvent);
+    public ResponseEntity<List<Optional<Event>>> findEventByUser(@PathVariable Integer id) {
+        return eventUserService.findEventByUser(id);
     }
 
-
     @GetMapping("/id-event/{id}")
-    public ResponseEntity findUserbyEvent(@PathVariable Integer id){
-        List<EventUser> eventUsers = eventUserRepository.findAll();
-        List<Integer> idUser = new ArrayList<>();
-        List<Optional<User>> userEvent = new ArrayList<>();
-
-        Integer[] idEvents;
-        for(int x = 0; x < eventUsers.size(); x++){
-            if(eventUsers.get(x).getId_event().equals(id)){
-                idUser.add(eventUsers.get(x).getId_user());
-            }
-        }
-
-        for(Integer idUsers : idUser){
-            Optional<User> user = userRepository.findById(idUsers);
-            userEvent.add(user);
-        }
-        if(userEvent.isEmpty()) return ResponseEntity.status(204).build();
-
-        return ResponseEntity.status(200).body(userEvent);
+    public ResponseEntity<List<Optional<User>>> findUserbyEvent(@PathVariable Integer id) {
+        return eventUserService.findUserbyEvent(id);
     }
 }
