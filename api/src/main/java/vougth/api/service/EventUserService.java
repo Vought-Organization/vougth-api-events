@@ -2,7 +2,6 @@ package vougth.api.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import vougth.api.domain.Event;
 import vougth.api.domain.EventUser;
@@ -26,7 +25,7 @@ public class EventUserService {
     @Autowired private EventRepository eventRepository;
     @Autowired private UserRepository userRepository;
 
-    public ResponseEntity<Void> addEventUser(Integer id_user, List<Integer> id_events) {
+    public void addEventUser(Integer id_user, List<Integer> id_events) {
         List<EventUser> events = eventUserRepository.findAll();
         FilaObjUtil<Integer> fila = new FilaObjUtil<Integer>(id_events.size());
 
@@ -34,7 +33,8 @@ public class EventUserService {
             for (Integer idEvent : id_events) fila.insert(idEvent);
 
             for (EventUser event : events) {
-                if (event.getIdUser() != null && event.getIdUser().equals(id_user)) deleteEventUser(event.getId());
+                if (event.getIdUser() != null && event.getIdUser().equals(id_user))
+                    deleteEventUser(event.getId());
             }
 
             for (Integer idEvent : id_events) {
@@ -45,83 +45,58 @@ public class EventUserService {
             ex.printStackTrace();
             throw ex;
         }
-        return ResponseEntity.status(201).build();
     }
 
-    public ResponseEntity<Void> deleteEventUser(Integer id) {
-        try {
-            if (!eventUserRepository.existsById(id)){
-                return ResponseEntity.status(404).build();
-            }
-            eventUserRepository.deleteById(id);
-            return ResponseEntity.status(200).build();
-        } catch (EventUserNotFoundException ex) {
-            ex.printStackTrace();
-            throw ex;
+    public void deleteEventUser(Integer id) {
+        if (!eventUserRepository.existsById(id)){
+            throw new EventUserNotFoundException();
         }
+        eventUserRepository.deleteById(id);
     }
 
-    public ResponseEntity<List<EventUser>> findAllEventsUser() {
-        List<EventUser> lista = eventUserRepository.findAll();
-
-        try {
-            if (lista.isEmpty()) return ResponseEntity.status(204).build();
-            return ResponseEntity.status(200).body(lista);
-        } catch (EventNotFoundException ex) {
-            ex.printStackTrace();
-            throw ex;
-        }
+    public List<EventUser> findAllEventsUser() {
+        List<EventUser> list = eventUserRepository.findAll();
+        if (list.isEmpty()) throw new EventUserNotFoundException();
+        return list;
     }
 
-    public ResponseEntity<List<Optional<Event>>> findEventByUser(Integer id){
+    public List<Optional<Event>> findEventByUser(Integer id){
         List<EventUser> eventUsers = eventUserRepository.findAll();
         List<Integer> idEvents = new ArrayList<>();
         List<Optional<Event>> userEvent = new ArrayList<>();
 
-        try {
-            for (EventUser eventUser : eventUsers) {
-                if (eventUser.getIdUser().equals(id)) {
-                    idEvents.add(eventUser.getIdEvent());
-                }
+        for (EventUser eventUser : eventUsers) {
+            if (eventUser.getIdUser().equals(id)) {
+                idEvents.add(eventUser.getIdEvent());
             }
-
-            for (int idEvent : idEvents){
-                Optional<Event> event = eventRepository.findById(idEvent);
-                userEvent.add(event);
-            }
-
-            if (userEvent.isEmpty()) return ResponseEntity.status(204).build();
-            return ResponseEntity.status(200).body(userEvent);
-
-        } catch (UserNotFoundException | EventNotFoundException ex) {
-            ex.printStackTrace();
-            throw ex;
         }
+
+        for (int idEvent : idEvents){
+            Optional<Event> event = eventRepository.findById(idEvent);
+            userEvent.add(event);
+        }
+
+        if (userEvent.isEmpty()) throw new EventUserNotFoundException();
+        return userEvent;
     }
 
-    public ResponseEntity<List<Optional<User>>> findUserbyEvent(Integer id){
+    public List<Optional<User>> findUserbyEvent(Integer id){
         List<EventUser> eventUsers = eventUserRepository.findAll();
         List<Integer> idUser = new ArrayList<>();
         List<Optional<User>> userEvent = new ArrayList<>();
 
-        try {
-            for (EventUser eventUser : eventUsers) {
-                if (eventUser.getIdEvent().equals(id)) {
-                    idUser.add(eventUser.getIdUser());
-                }
+        for (EventUser eventUser : eventUsers) {
+            if (eventUser.getIdEvent().equals(id)) {
+                idUser.add(eventUser.getIdUser());
             }
-
-            for (Integer idUsers : idUser){
-                Optional<User> user = userRepository.findById(idUsers);
-                userEvent.add(user);
-            }
-
-            if (userEvent.isEmpty()) return ResponseEntity.status(204).build();
-            return ResponseEntity.status(200).body(userEvent);
-
-        } catch (UserNotFoundException | EventNotFoundException ex) {
-            ex.printStackTrace();
-            throw ex;
         }
+
+        for (Integer idUsers : idUser){
+            Optional<User> user = userRepository.findById(idUsers);
+            userEvent.add(user);
+        }
+
+        if (userEvent.isEmpty()) throw new UserNotFoundException();
+        return userEvent;
     }
 }
