@@ -6,10 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import vougth.api.exception.EventNoContentException;
-import vougth.api.exception.EventNotFoundException;
-import vougth.api.exception.ExceptionResponse;
-import vougth.api.exception.UserNoContentException;
+import vougth.api.exception.*;
 
 import java.time.LocalDateTime;
 
@@ -42,5 +39,21 @@ public class CustomizedExceptionHandling extends ResponseEntityExceptionHandler 
         response.setMessage("No Content");
         ResponseEntity<Object> entity = new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
         return entity;
+    }
+
+    @ExceptionHandler(TicketNotFoundException.class)
+    public ResponseEntity<Object> handleExceptions(TicketNotFoundException exception, WebRequest webRequest) {
+        ExceptionResponse response = new ExceptionResponse();
+        response.setDateTime(LocalDateTime.now());
+        response.setMessage("Not found");
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(EventNotExistsException.class)
+    public ResponseEntity<Object> handleExceptions(EventNotExistsException exception, WebRequest webRequest) {
+        ExceptionResponse response = new ExceptionResponse();
+        response.setDateTime(LocalDateTime.now());
+        response.setMessage("No content");
+        return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
     }
 }

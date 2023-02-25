@@ -1,16 +1,11 @@
 package vougth.api.service;
 
-import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import vougth.api.domain.User;
 import vougth.api.exception.UserNoContentException;
+import vougth.api.exception.UserNotFoundException;
 import vougth.api.repository.UserRepository;
 import vougth.api.response.UserResponseDto;
 
@@ -22,15 +17,26 @@ public class UserService {
 
     public List<User> findAll() {
         List<User> userList = userRepository.findAll();
-        if (userList.isEmpty()) { throw new UserNoContentException(); }
+        if (userList.isEmpty()) {
+            throw new UserNoContentException();
+        }
         return userList;
     }
 
-    public Long count() { return userRepository.count(); }
+    public Long count() {
+        return userRepository.count();
+    }
 
     public ResponseEntity<User> createUser(User newUser) {
         userRepository.save(newUser);
         return ResponseEntity.status(201).body(newUser);
+    }
+
+    public ResponseEntity<List<User>> getAllUsers() throws UserNotFoundException {
+        List<User> userList = userRepository.findAll();
+        return userList.isEmpty()
+                ? ResponseEntity.status(204).build()
+                : ResponseEntity.status(200).body(userList);
     }
 
     public ResponseEntity<List<UserResponseDto>> getLogin() {
