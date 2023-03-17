@@ -11,39 +11,46 @@ import vougth.api.repository.UserRepository;
 import vougth.api.service.UserService;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController @RequestMapping("v1/users") @CrossOrigin
 public class UserController {
     @Autowired private UserRepository userRepository;
     @Autowired private UserService userService;
 
-    @PostMapping @ResponseStatus(HttpStatus.CREATED) @Operation(summary = "Cadastra um usuário")
+    @PostMapping @Operation(summary = "Cadastra um usuário")
     public ResponseEntity<User> createUser(@RequestBody User newUser){
-        return userService.createUser(newUser);
+        userService.createUser(newUser);
+        return ResponseEntity.status(201).body(newUser);
     }
 
-    @GetMapping("/login") @ResponseStatus(HttpStatus.OK) @Operation(summary = "Executa o Login")
+    @GetMapping("/login") @Operation(summary = "Executa o Login")
     public ResponseEntity<List<UserResponseDto>> getLogin() {
-        return userService.getLogin();
+        List<UserResponseDto> loginList = userService.getLogin();
+        return ResponseEntity.status(200).body(loginList);
     }
 
-    @GetMapping @ResponseStatus(HttpStatus.OK) @Operation(summary = "Lista todos os usuários")
+    @GetMapping @Operation(summary = "Lista todos os usuários")
     public ResponseEntity<List<User>> getAllUsers(){
-        return userService.getAllUsers();
+        List<User> usersList = userService.getAllUsers();
+        return ResponseEntity.status(200).body(usersList);
     }
 
     @GetMapping("/{id}") @ResponseStatus(HttpStatus.OK) @Operation(summary = "Busca um usuário específico")
-    public ResponseEntity<User> getUserById(@PathVariable int id){
-        return userService.getUserById(id);
+    public ResponseEntity<Optional<User>> getUserById(@PathVariable int id){
+        Optional<User> user = userService.getUserById(id);
+        return ResponseEntity.status(200).body(user);
     }
 
-    @DeleteMapping("/{id}") @ResponseStatus(HttpStatus.OK) @Operation(summary = "Deleta um usuário específico")
+    @DeleteMapping("/{id}") @Operation(summary = "Deleta um usuário específico")
     public ResponseEntity<Void> deleteUserById(@PathVariable int id){
-        return userService.deleteUserById(id);
+        userService.deleteUserById(id);
+        return ResponseEntity.status(200).build();
     }
 
     @PutMapping("/{id}") @ResponseStatus(HttpStatus.OK) @Operation(summary = "Atualiza um usuário específico")
     public ResponseEntity<User> updateUserById(@PathVariable int id, @RequestBody User updatedUser){
-        return userService.updateUserById(id, updatedUser);
+        User user = userService.updateUserById(id, updatedUser);
+        return ResponseEntity.status(200).body(user);
     }
 }
