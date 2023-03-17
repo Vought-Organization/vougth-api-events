@@ -8,6 +8,7 @@ import vougth.api.repository.TicketRepository;
 import vougth.api.service.TicketService;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin
@@ -18,12 +19,17 @@ public class TicketController {
 
     @GetMapping
     public ResponseEntity<List<Ticket>> getAllTicket() {
-        return ticketService.getAllTicket();
+        List<Ticket> ticketList = ticketService.getAllTicket();
+        return (ticketList.isEmpty())
+                ? ResponseEntity.status(204).build()
+                : ResponseEntity.status(200).body(ticketList);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Ticket> getTicketById(@PathVariable int id) {
-        return ticketService.getTicketById(id);
+    public ResponseEntity<Optional<Ticket>> getTicketById(@PathVariable int id) {
+        Optional<Ticket> ticket = ticketService.getTicketById(id);
+        return (ticket.isEmpty())
+                ? ResponseEntity.status(204).build()
+                : ResponseEntity.status(200).body(ticket);
     }
 }
-

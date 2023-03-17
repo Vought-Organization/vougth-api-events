@@ -19,16 +19,21 @@ public class TicketEventController {
 
     @PostMapping
     public ResponseEntity<Ticket> createTicket(@RequestBody Ticket newTicket) {
-        return ticketEventService.createTicket(newTicket);
+        Ticket ticket = ticketEventService.createTicket(newTicket);
+        return ResponseEntity.status(200).body(newTicket);
     }
 
     @GetMapping("/events/{id}")
     public ResponseEntity<List<Ticket>> getTickets(@PathVariable Integer id) {
-        return ticketEventService.getTickets(id);
+        List<Ticket> ticketList = ticketEventService.getTickets(id);
+        return (!ticketList.isEmpty())
+                ? ResponseEntity.status(200).body(ticketList)
+                : ResponseEntity.status(204).build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTicketById(@PathVariable int id) {
-        return ticketEventService.deleteTicketById(id);
+        ticketEventService.deleteTicketById(id);
+        return ResponseEntity.status(200).build();
     }
 }
