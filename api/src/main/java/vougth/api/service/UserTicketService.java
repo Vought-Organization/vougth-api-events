@@ -22,7 +22,7 @@ public class UserTicketService {
     @Autowired private UserRepository userRepository;
     @Autowired private TicketRepository ticketRepository;
 
-    public ResponseEntity<UserTicket> post(@RequestBody @Valid NewBuyRequestDto newBuyRequestDto) {
+    public UserTicket post(@RequestBody @Valid NewBuyRequestDto newBuyRequestDto) {
         if (!ticketRepository.existsById(newBuyRequestDto.getIdTicket())) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ticket não encontrado");
         }
@@ -37,6 +37,6 @@ public class UserTicketService {
         newUserTicket.setApproved(newBuyRequestDto.isApproved());
         userTicketRepository.save(newUserTicket);
 
-        return ResponseEntity.status(201).body(newUserTicket);
+        return newUserTicket;
     }
 }

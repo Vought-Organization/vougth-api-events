@@ -36,7 +36,7 @@ public class UserController {
         return ResponseEntity.status(200).body(usersList);
     }
 
-    @GetMapping("/{id}") @ResponseStatus(HttpStatus.OK) @Operation(summary = "Busca um usuário específico")
+    @GetMapping("/{id}") @Operation(summary = "Busca um usuário específico")
     public ResponseEntity<Optional<User>> getUserById(@PathVariable int id){
         Optional<User> user = userService.getUserById(id);
         return ResponseEntity.status(200).body(user);
@@ -48,7 +48,7 @@ public class UserController {
         return ResponseEntity.status(200).build();
     }
 
-    @PutMapping("/{id}") @ResponseStatus(HttpStatus.OK) @Operation(summary = "Atualiza um usuário específico")
+    @PutMapping("/{id}") @Operation(summary = "Atualiza um usuário específico")
     public ResponseEntity<User> updateUserById(@PathVariable int id, @RequestBody User updatedUser){
         User user = userService.updateUserById(id, updatedUser);
         return ResponseEntity.status(200).body(user);
