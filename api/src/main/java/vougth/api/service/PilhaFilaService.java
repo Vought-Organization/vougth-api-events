@@ -22,27 +22,27 @@ public class PilhaFilaService {
     @Autowired private EventService eventService;
     @Autowired private UserService userService;
 
-    public ResponseEntity<List<Event>> findByQtty(Integer qtty) {
+    public List<Event> findByQtty(Integer qtty) {
         List<Event> events = eventService.findAllEvents();
         List<Event> lastEvents = new ArrayList<>();
         PilhaObjUtil<Event> lastRecordsStack = new PilhaObjUtil<>(events.size());
 
         try {
             if (!events.isEmpty()) {
-                if (events.size() <= qtty) return ResponseEntity.status(200).body(events);
+                if (events.size() <= qtty) return events;
                 for (int i = events.size() - 1; i > events.size() - qtty - 1; i--) lastRecordsStack.push(events.get(i));
                 for (int i = 0; i < qtty; i++) lastEvents.add(lastRecordsStack.pop());
 
-                return ResponseEntity.status(200).body(lastEvents);
+                return lastEvents;
             }
-            return ResponseEntity.status(204).build();
+            return events;
         } catch (EventNotFoundException ex) {
             ex.printStackTrace();
             throw ex;
         }
     }
 
-    public ResponseEntity<Void> recordTxtFile() {
+    public void recordTxtFile() {
         List<Event> events = eventService.findAllEvents();
         List<User> users = userService.findAll();
 
@@ -73,16 +73,14 @@ public class PilhaFilaService {
                 trailer += String.format("%010d", counterRegisters);
                 TxtAdapter.gravaRegistro(trailer, "eventos-usuarios.txt");
 
-                return ResponseEntity.status(201).build();
             }
-            return ResponseEntity.status(204).build();
         } catch (EventNotFoundException | EventNotExistsException ex) {
             ex.printStackTrace();
             throw ex;
         }
     }
 
-    public ResponseEntity<Void> getEventsTxt(HttpServletResponse response) throws IOException {
+    public void getEventsTxt(HttpServletResponse response) throws IOException {
         List<Event> eventList = eventService.findAllEvents();
         List<User> userList = userService.findAll();
 
@@ -98,27 +96,26 @@ public class PilhaFilaService {
                     "Content-type: application/force-download, Content-Disposition",
                     "attachment; filename=" + "eventos-usuarios.txt");
             response.setStatus(200);
-            return ResponseEntity.status(200).build();
         } catch (IOException ex) {
             ex.printStackTrace();
             throw ex;
         }
     }
 
-    public ResponseEntity<List<Event>> findByQttyFila(Integer qtty) {
+    public List<Event> findByQttyFila(Integer qtty) {
         List<Event> events = eventService.findAllEvents();
         List<Event> lastEvents = new ArrayList<>();
         FilaObjUtil<Event> lastRecordsQueue = new FilaObjUtil<>(events.size());
 
         try {
             if (!events.isEmpty()) {
-                if (events.size() <= qtty) return ResponseEntity.status(200).body(events);
+                if (events.size() <= qtty) return events;
                 for (int i = events.size() - 1; i > events.size() - qtty - 1; i--) lastRecordsQueue.insert(events.get(i));
                 for (int i = 0; i < qtty; i++) lastEvents.add(lastRecordsQueue.poll());
 
-                return ResponseEntity.status(200).body(lastEvents);
+                return lastEvents;
             }
-            return ResponseEntity.status(204).build();
+            return events;
         } catch (EventNotFoundException ex) {
             ex.printStackTrace();
             throw ex;

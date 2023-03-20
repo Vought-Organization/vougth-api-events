@@ -17,13 +17,11 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("user/ticket")
 public class UserTicketController {
-    @Autowired private UserTicketRepository userTicketRepository;
-    @Autowired private UserRepository userRepository;
-    @Autowired private TicketRepository ticketRepository;
     private UserTicketService service;
 
-    @PostMapping @ResponseStatus(HttpStatus.CREATED) @Operation(summary = "Valida compra do ingresso")
+    @PostMapping @Operation(summary = "Validação da compra do ingresso")
     public ResponseEntity<UserTicket> post(@RequestBody @Valid NewBuyRequestDto newBuyRequestDto) {
-        return service.post(newBuyRequestDto);
+        UserTicket newTicket = service.post(newBuyRequestDto);
+        return ResponseEntity.status(201).body(newTicket);
     }
 }

@@ -1,7 +1,6 @@
 package vougth.api.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import vougth.api.domain.User;
 import vougth.api.exception.UserNoContentException;
@@ -10,6 +9,7 @@ import vougth.api.repository.UserRepository;
 import vougth.api.response.UserResponseDto;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service @RequiredArgsConstructor
 public class UserService {
@@ -27,42 +27,34 @@ public class UserService {
         return userRepository.count();
     }
 
-    public ResponseEntity<User> createUser(User newUser) {
-        userRepository.save(newUser);
-        return ResponseEntity.status(201).body(newUser);
+    public User createUser(User newUser) {
+        return userRepository.save(newUser);
+//        return newUser;
     }
 
-    public ResponseEntity<List<User>> getAllUsers() throws UserNotFoundException {
-        List<User> userList = userRepository.findAll();
-        return userList.isEmpty()
-                ? ResponseEntity.status(204).build()
-                : ResponseEntity.status(200).body(userList);
+    public List<User> getAllUsers() throws UserNotFoundException {
+        return userRepository.findAll();
     }
 
-    public ResponseEntity<List<UserResponseDto>> getLogin() {
-        List<UserResponseDto> userResponseDto = userRepository.getUserResponse();
-        if (userResponseDto.isEmpty()){ return ResponseEntity.status(204).build(); }
-        return ResponseEntity.status(200).body(userResponseDto);
+    public List<UserResponseDto> getLogin() {
+        return userRepository.getUserResponse();
     }
 
-    public ResponseEntity<User> getUserById(int id){
-        return ResponseEntity.of(userRepository.findById(id));
+    public Optional<User> getUserById(int id){
+        return userRepository.findById(id);
     }
 
-    public ResponseEntity<Void> deleteUserById(int id){
+    public void deleteUserById(int id){
         if (userRepository.existsById(id)) {
             userRepository.deleteById(id);
-            return ResponseEntity.status(200).build();
         }
-        return ResponseEntity.status(404).build();
     }
 
-    public ResponseEntity<User> updateUserById(int id, User updatedUser){
+    public User updateUserById(int id, User updatedUser){
         if (userRepository.existsById(id)) {
             updatedUser.setIdUser(id);
             userRepository.save(updatedUser);
-            return ResponseEntity.status(200).body(updatedUser);
         }
-        return ResponseEntity.status(404).build();
+        return updatedUser;
     }
 }
