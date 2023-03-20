@@ -19,38 +19,44 @@ import java.util.Optional;
 public class EventUserController {
     @Autowired private EventUserService eventUserService;
 
-    @PostMapping("/update-events/{id_user}") @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/update-events/{id_user}")
     @Operation(summary = "Adiciona uma relação entre Usuário e Evento")
     public ResponseEntity<Void> addEventUser(@PathVariable Integer id_user, @RequestBody List<Integer> id_events) {
         eventUserService.addEventUser(id_user, id_events);
         return ResponseEntity.status(201).build();
     }
 
-    @DeleteMapping("/{id}") @ResponseStatus(HttpStatus.OK)
+    @DeleteMapping("/{id}")
     @Operation(summary = "Deleta uma relação entre Usuário e Evento")
     public ResponseEntity<Void> deleteEventUser(@PathVariable Integer id) {
         eventUserService.deleteEventUser(id);
         return ResponseEntity.status(200).build();
     }
 
-    @GetMapping @ResponseStatus(HttpStatus.OK)
+    @GetMapping
     @Operation(summary = "Busca todas as relações entre Usuário e Evento")
     public ResponseEntity<List<EventUser>> findAllEventsUser() {
-        List<EventUser> list = eventUserService.findAllEventsUser();
-        return ResponseEntity.status(200).body(list);
+        List<EventUser> eventList = eventUserService.findAllEventsUser();
+        return (eventList.isEmpty())
+                ? ResponseEntity.status(204).build()
+                : ResponseEntity.status(200).body(eventList);
     }
 
-    @GetMapping("/id-user/{id}") @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/id-user/{id}")
     @Operation(summary = "Busca todos os eventos de um usuário específico")
     public ResponseEntity<List<Optional<Event>>> findEventByUser(@PathVariable Integer id) {
-        List<Optional<Event>> list = eventUserService.findEventByUser(id);
-        return ResponseEntity.status(200).body(list);
+        List<Optional<Event>> eventList = eventUserService.findEventByUser(id);
+        return (eventList.isEmpty())
+                ? ResponseEntity.status(204).build()
+                : ResponseEntity.status(200).body(eventList);
     }
 
-    @GetMapping("/id-event/{id}") @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/id-event/{id}")
     @Operation(summary = "Busca todos os usuários de um evento específico")
     public ResponseEntity<List<Optional<User>>> findUserbyEvent(@PathVariable Integer id) {
-        List<Optional<User>> list = eventUserService.findUserbyEvent(id);
-        return ResponseEntity.status(200).body(list);
+        List<Optional<User>> eventList = eventUserService.findUserbyEvent(id);
+        return (eventList.isEmpty())
+                ? ResponseEntity.status(204).build()
+                : ResponseEntity.status(200).body(eventList);
     }
 }

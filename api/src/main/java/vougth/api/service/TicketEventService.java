@@ -2,7 +2,6 @@ package vougth.api.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import vougth.api.domain.Event;
 import vougth.api.domain.Ticket;
@@ -11,12 +10,10 @@ import vougth.api.exception.TicketNotFoundException;
 import vougth.api.repository.EventRepository;
 import vougth.api.repository.TicketRepository;
 
-import java.io.IOException;
 import java.util.List;
 
 @Service @RequiredArgsConstructor
 public class TicketEventService {
-    @Autowired private TicketService ticketService;
     @Autowired private TicketRepository ticketRepository;
     @Autowired private EventRepository eventRepository;
 

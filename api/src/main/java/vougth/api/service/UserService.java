@@ -1,7 +1,6 @@
 package vougth.api.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import vougth.api.domain.User;
 import vougth.api.exception.UserNoContentException;
@@ -29,8 +28,8 @@ public class UserService {
     }
 
     public User createUser(User newUser) {
-        userRepository.save(newUser);
-        return newUser;
+        return userRepository.save(newUser);
+//        return newUser;
     }
 
     public List<User> getAllUsers() throws UserNotFoundException {

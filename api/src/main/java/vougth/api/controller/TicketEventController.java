@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import vougth.api.domain.Ticket;
-import vougth.api.repository.EventRepository;
 import vougth.api.service.TicketEventService;
 
 import java.util.List;
@@ -15,7 +14,6 @@ import java.util.List;
 public class TicketEventController {
     @Autowired
     private TicketEventService ticketEventService;
-    @Autowired private EventRepository eventRepository;
 
     @PostMapping
     public ResponseEntity<Ticket> createTicket(@RequestBody Ticket newTicket) {

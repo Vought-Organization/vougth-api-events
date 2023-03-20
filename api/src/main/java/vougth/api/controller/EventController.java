@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import vougth.api.domain.Event;
 import vougth.api.service.EventService;
-import vougth.api.service.UserService;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -17,9 +16,7 @@ import java.util.Optional;
 @RequestMapping("v1/events")
 @CrossOrigin
 public class EventController {
-
     private final EventService eventService;
-    private final UserService userService;
 
     @PostMapping
     @Operation(summary = "Cria Evento")

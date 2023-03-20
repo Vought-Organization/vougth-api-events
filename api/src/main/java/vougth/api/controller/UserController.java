@@ -2,12 +2,10 @@ package vougth.api.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import vougth.api.domain.User;
 import vougth.api.response.UserResponseDto;
-import vougth.api.repository.UserRepository;
 import vougth.api.service.UserService;
 
 import java.util.List;
@@ -15,7 +13,6 @@ import java.util.Optional;
 
 @RestController @RequestMapping("v1/users") @CrossOrigin
 public class UserController {
-    @Autowired private UserRepository userRepository;
     @Autowired private UserService userService;
 
     @PostMapping @Operation(summary = "Cadastra um usuário")
