@@ -1,66 +1,53 @@
 package vougth.api.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import vougth.api.domain.User;
 import vougth.api.response.UserResponseDto;
-import vougth.api.repository.UserRepository;
+import vougth.api.service.UserService;
 
 import java.util.List;
+import java.util.Optional;
 
-@RestController
-@RequestMapping("v1/users")
-@CrossOrigin
+@RestController @RequestMapping("v1/users") @CrossOrigin
 public class UserController {
+    @Autowired private UserService userService;
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @PostMapping
+    @PostMapping @Operation(summary = "Cadastra um usuário")
     public ResponseEntity<User> createUser(@RequestBody User newUser){
-        userRepository.save(newUser);
+        userService.createUser(newUser);
         return ResponseEntity.status(201).body(newUser);
     }
 
-    @GetMapping("/login")
+    @GetMapping("/login") @Operation(summary = "Executa o Login")
     public ResponseEntity<List<UserResponseDto>> getLogin() {
-        List<UserResponseDto> userResponsDtos = userRepository.getUserResponse();
-        if (userResponsDtos.isEmpty()){
-            return ResponseEntity.status(204).build();
-        }
-        return ResponseEntity.status(200).body(userResponsDtos);
+        List<UserResponseDto> loginList = userService.getLogin();
+        return ResponseEntity.status(200).body(loginList);
     }
 
-    @GetMapping
-    public ResponseEntity<List<User>> getAllUser(){
-        List<User> userList = userRepository.findAll();
-        return userList.isEmpty()
-                ? ResponseEntity.status(204).build()
-                : ResponseEntity.status(200).body(userList);
+    @GetMapping @Operation(summary = "Lista todos os usuários")
+    public ResponseEntity<List<User>> getAllUsers(){
+        List<User> usersList = userService.getAllUsers();
+        return ResponseEntity.status(200).body(usersList);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable int id){
-        return ResponseEntity.of(userRepository.findById(id));
+    @GetMapping("/{id}") @Operation(summary = "Busca um usuário específico")
+    public ResponseEntity<Optional<User>> getUserById(@PathVariable int id){
+        Optional<User> user = userService.getUserById(id);
+        return ResponseEntity.status(200).body(user);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}") @Operation(summary = "Deleta um usuário específico")
     public ResponseEntity<Void> deleteUserById(@PathVariable int id){
-        if (userRepository.existsById(id)){
-            userRepository.deleteById(id);
-            return ResponseEntity.status(200).build();
-        }
-        return ResponseEntity.status(404).build();
+        userService.deleteUserById(id);
+        return ResponseEntity.status(200).build();
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id}") @Operation(summary = "Atualiza um usuário específico")
     public ResponseEntity<User> updateUserById(@PathVariable int id, @RequestBody User updatedUser){
-        if (userRepository.existsById(id)){
-            updatedUser.setIdUser(id);
-            userRepository.save(updatedUser);
-            return ResponseEntity.status(200).body(updatedUser);
-        }
-        return ResponseEntity.status(404).build();
+        User user = userService.updateUserById(id, updatedUser);
+        return ResponseEntity.status(200).body(user);
     }
 }

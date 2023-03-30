@@ -26,7 +26,6 @@ class EventControllerTest {
     @Test
     @DisplayName("Não retorna lista de users e retorna o status 204")
     void ReturnsWithFailure(){
-
         when(repository.findAll()).thenReturn(new ArrayList<>());
 
         ResponseEntity<List<Event>> listEvent = controller.getAllEvent();

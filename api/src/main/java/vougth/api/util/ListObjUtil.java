@@ -1,5 +1,7 @@
 package vougth.api.util;
 
+import java.io.IOException;
+
 public class ListObjUtil<T>{
     private T[] vetor;
     private int nroElem;
@@ -13,40 +15,37 @@ public class ListObjUtil<T>{
         return nroElem == 0;
     }
 
-    public boolean adicionar(T elemento) {
+    public boolean adicionar(T elemento) throws IOException {
         if (nroElem >= vetor.length) {
-            System.out.println("A lista está cheia");
-            return false;
+            throw new IOException();
         }
         vetor[nroElem++] = elemento;
         return true;
     }
 
     //metodo que adiciona no inicio (Provavelmente com erro)
-    public boolean adicionaNoInicio(T elemento){
+    public boolean adicionaNoInicio(T elemento) throws IOException {
         if (nroElem >= vetor.length) {
-            System.out.println("A lista está cheia");
-            return false;
+            throw new IOException();
         }
 
         T[] vetorNovo = (T[]) new Object[nroElem++];
 
-        for (int i = 0; i < vetor.length; i++){
+        for (T t : vetor) {
             vetorNovo[0] = elemento;
-            vetorNovo[nroElem++] = vetor[i];
+            vetorNovo[nroElem++] = t;
         }
         return true;
 
     }
 
-    public void exibir() {
+    public void exibir() throws IOException {
         if (nroElem == 0) {
-            System.out.println("\nA lista está vazia.");
+            throw new IOException();
         }
         else {
             for (int i = 0; i < nroElem; i++) {
-                System.out.print(vetor[i] + "\t");
-                System.out.println("");
+                System.out.println(vetor[i] + "\t");
             }
             System.out.println();
         }
@@ -62,10 +61,9 @@ public class ListObjUtil<T>{
     }
 
 
-    public boolean removePeloIndice (int indice) {
+    public boolean removePeloIndice (int indice) throws IOException {
         if (indice < 0 || indice >= nroElem) {
-            System.out.println("\nÍndice inválido!");
-            return false;
+            throw new IOException();
         }
 
         for (int i = indice; i < nroElem - 1; i++) {
@@ -75,7 +73,7 @@ public class ListObjUtil<T>{
         return true;
     }
 
-    public boolean removeElemento(T elementoARemover) {
+    public boolean removeElemento(T elementoARemover) throws IOException {
         return removePeloIndice(buscar(elementoARemover));
     }
 

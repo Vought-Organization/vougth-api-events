@@ -10,9 +10,7 @@ import java.util.List;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
-    @Query("select new " +
-            "vougth.api.response.UserResponseDto" +
-            "(u.idUser, u.userName, u.password, u.email) from User u")
+    @Query("select new vougth.api.response.UserResponseDto(u.idUser, u.userName, u.password, u.email) from User u")
     List<UserResponseDto> getUserResponse();
 
 }
