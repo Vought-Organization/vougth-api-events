@@ -3,7 +3,6 @@ package vougth.api.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -50,14 +49,6 @@ public class Ticket {
 
     public void setPrecoIngresso(Double precoIngresso) {
         this.precoIngresso = precoIngresso;
-    }
-
-    public UUID getUuid() {
-        return ticketCode;
-    }
-
-    public void setUuid(UUID uuid) {
-        this.ticketCode = uuid;
     }
 
     public void setIdTicket(Integer idTicket) {

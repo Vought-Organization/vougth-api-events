@@ -19,8 +19,7 @@ public class CustomizedExceptionHandling extends ResponseEntityExceptionHandler 
         ExceptionResponse response = new ExceptionResponse();
         response.setDateTime(LocalDateTime.now());
         response.setMessage("No Content");
-        ResponseEntity<Object> entity = new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
-        return entity;
+        return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
     }
 
     @ExceptionHandler(EventNotFoundException.class)
@@ -28,8 +27,7 @@ public class CustomizedExceptionHandling extends ResponseEntityExceptionHandler 
         ExceptionResponse response = new ExceptionResponse();
         response.setDateTime(LocalDateTime.now());
         response.setMessage("Not found");
-        ResponseEntity<Object> entity = new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
-        return entity;
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(UserNoContentException.class)
@@ -37,8 +35,7 @@ public class CustomizedExceptionHandling extends ResponseEntityExceptionHandler 
         ExceptionResponse response = new ExceptionResponse();
         response.setDateTime(LocalDateTime.now());
         response.setMessage("No Content");
-        ResponseEntity<Object> entity = new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
-        return entity;
+        return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
     }
 
     @ExceptionHandler(TicketNotFoundException.class)

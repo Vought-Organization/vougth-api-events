@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "events")
-@CrossOrigin
 public class Event {
 
     @Id
@@ -87,14 +86,6 @@ public class Event {
         this.nameEvent = nameEvent;
     }
 
-    public String getCategory() {
-        return categoryEvent;
-    }
-
-    public void setCategory(String category) {
-        this.categoryEvent = category;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -117,14 +108,6 @@ public class Event {
 
     public void setLongitude(String longitude) {
         this.longitude = longitude;
-    }
-
-    public String getAddress() {
-        return addressEvent;
-    }
-
-    public void setAddress(String address) {
-        this.addressEvent = address;
     }
 
     public String getCity() {

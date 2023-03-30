@@ -42,23 +42,15 @@ public class TxtAdapter {
 
 
     // Método para gravar registros para o import de arquivo
-    public static void gravaRegistro(String registro, String nomeArq) {
-        BufferedWriter saida = null;    // objeto usado para gravar no arquivo
+    public static void gravaRegistro(String registro, String nomeArq) throws IOException {
+        BufferedWriter saida;
+        saida = new BufferedWriter(new FileWriter(nomeArq, true));
 
-        // Abre o arquivo
         try {
-            // Abre o arquivo com append = true, para poder ir acrescentando registros no arquivo
-            saida = new BufferedWriter(new FileWriter(nomeArq, true));
-        } catch (IOException erro) {
-            System.out.println("Erro ao abrir o arquivo: " + erro.getMessage());
-        }
-
-        // Grava o registro e fecha o arquivo
-        try {
-            saida.append(registro + "\n");  // Grava o registro e o final de registro (\n)
-            saida.close();                  // Fecha o arquivo
-        } catch (IOException erro) {
-            System.out.println("Erro ao gravar no arquivo: " + erro.getMessage());
+            saida.append(registro).append("\n");
+            saida.close();
+        } finally {
+            saida.close();
         }
     }
 }

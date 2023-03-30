@@ -25,24 +25,23 @@ public class EventUserService {
     @Autowired private EventRepository eventRepository;
     @Autowired private UserRepository userRepository;
 
-    public void addEventUser(Integer id_user, List<Integer> id_events) {
+    public void addEventUser(Integer idUser, List<Integer> idEvents) {
         List<EventUser> events = eventUserRepository.findAll();
-        FilaObjUtil<Integer> fila = new FilaObjUtil<Integer>(id_events.size());
+        FilaObjUtil<Integer> fila = new FilaObjUtil<>(idEvents.size());
 
         try {
-            for (Integer idEvent : id_events) fila.insert(idEvent);
+            for (Integer idEvent : idEvents) fila.insert(idEvent);
 
             for (EventUser event : events) {
-                if (event.getIdUser() != null && event.getIdUser().equals(id_user))
+                if (event.getIdUser() != null && event.getIdUser().equals(idUser))
                     deleteEventUser(event.getId());
             }
 
-            for (Integer idEvent : id_events) {
-                EventUser eventUser = new EventUser(id_user, fila.poll());
+            for (Integer idEvent : idEvents) {
+                EventUser eventUser = new EventUser(idUser, fila.poll());
                 eventUserRepository.save(eventUser);
             }
         } catch (EventNotFoundException | EventUserNotFoundException ex) {
-            ex.printStackTrace();
             throw ex;
         }
     }

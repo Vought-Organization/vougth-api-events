@@ -1,7 +1,6 @@
 package vougth.api.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import vougth.api.domain.Event;
 import vougth.api.domain.User;
 import vougth.api.exception.EventNotExistsException;
@@ -27,22 +26,17 @@ public class PilhaFilaService {
         List<Event> lastEvents = new ArrayList<>();
         PilhaObjUtil<Event> lastRecordsStack = new PilhaObjUtil<>(events.size());
 
-        try {
-            if (!events.isEmpty()) {
-                if (events.size() <= qtty) return events;
-                for (int i = events.size() - 1; i > events.size() - qtty - 1; i--) lastRecordsStack.push(events.get(i));
-                for (int i = 0; i < qtty; i++) lastEvents.add(lastRecordsStack.pop());
+        if (!events.isEmpty()) {
+            if (events.size() <= qtty) return events;
+            for (int i = events.size() - 1; i > events.size() - qtty - 1; i--) lastRecordsStack.push(events.get(i));
+            for (int i = 0; i < qtty; i++) lastEvents.add(lastRecordsStack.pop());
 
-                return lastEvents;
-            }
-            return events;
-        } catch (EventNotFoundException ex) {
-            ex.printStackTrace();
-            throw ex;
+            return lastEvents;
         }
+        return events;
     }
 
-    public void recordTxtFile() {
+    public void recordTxtFile() throws IOException {
         List<Event> events = eventService.findAllEvents();
         List<User> users = userService.findAll();
 
@@ -54,29 +48,29 @@ public class PilhaFilaService {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
                 header += dateFormat.format(today);
                 header += "01";
+                String nomeArq = "eventos-usuarios.txt";
 
-                TxtAdapter.gravaRegistro(header, "eventos-usuarios.txt");
+                TxtAdapter.gravaRegistro(header, nomeArq);
 
                 for (Event event : events) {
                     String body = formatEventsDataToTxtFile(event);
                     counterRegisters++;
-                    TxtAdapter.gravaRegistro(body, "eventos-usuarios.txt");
+                    TxtAdapter.gravaRegistro(body, nomeArq);
                 }
 
                 for (User user : users) {
                     String body = formatUsersDataToTxtFile(user);
                     counterRegisters++;
-                    TxtAdapter.gravaRegistro(body, "eventos-usuarios.txt");
+                    TxtAdapter.gravaRegistro(body, nomeArq);
                 }
 
                 String trailer = "01 ";
                 trailer += String.format("%010d", counterRegisters);
-                TxtAdapter.gravaRegistro(trailer, "eventos-usuarios.txt");
+                TxtAdapter.gravaRegistro(trailer, nomeArq);
 
             }
-        } catch (EventNotFoundException | EventNotExistsException ex) {
-            ex.printStackTrace();
-            throw ex;
+        } catch (EventNotFoundException | EventNotExistsException | IOException exception) {
+            throw exception;
         }
     }
 
@@ -97,7 +91,6 @@ public class PilhaFilaService {
                     "attachment; filename=" + "eventos-usuarios.txt");
             response.setStatus(200);
         } catch (IOException ex) {
-            ex.printStackTrace();
             throw ex;
         }
     }
@@ -117,40 +110,46 @@ public class PilhaFilaService {
             }
             return events;
         } catch (EventNotFoundException ex) {
-            ex.printStackTrace();
             throw ex;
         }
     }
 
     // métodos auxiliares
     public String formatEventsDataToTxtFile(Event event) {
+        String format1010 = "%-10.10s";
+        String format2020 = "%-20.20s";
+        String format4040 = "%-40.40s";
         String body = "02 ";
         body += String.format("%03d ", event.getIdEvent());
-        body += String.format("%-40.40s", event.getNameEvent());
-        body += String.format("%-10.10s", event.getCep());
-        body += String.format("%-10.10s", event.getCategoryEvent());
+        body += String.format(format4040, event.getNameEvent());
+        body += String.format(format1010, event.getCep());
+        body += String.format(format1010, event.getCategoryEvent());
         body += String.format("%-50.50s", event.getAddressEvent());
         body += "\n";
         body += String.format("%-25.25s", event.getDescription());
         body += String.format("%-30.30s", event.getCity());
-        body += String.format("%-20.20s", event.getState());
-        body += String.format("%-20.20s", event.getStartData());
-        body += String.format("%-20.20s", event.getEndData());
+        body += String.format(format2020, event.getState());
+        body += String.format(format2020, event.getStartData());
+        body += String.format(format2020, event.getEndData());
 
         return body;
     }
 
     public String formatUsersDataToTxtFile(User user) {
+        String format1010 = "%-10.10s";
+        String format2020 = "%-20.20s";
+        String format4040 = "%-40.40s";
         String body = "02 ";
+
         body += String.format("%03d ", user.getIdUser());
-        body += String.format("%-40.40s", user.getUserName());
-        body += String.format("%-40.40s", user.getEmail());
-        body += String.format("%-10.10s", user.getNickname());
-        body += String.format("%-20.20s", user.getCpf());
+        body += String.format(format4040, user.getUserName());
+        body += String.format(format4040, user.getEmail());
+        body += String.format(format1010, user.getNickname());
+        body += String.format(format2020, user.getCpf());
         body += "\n";
         body += String.format("%-15.15s", user.getTelefone());
-        body += String.format("%-20.20s", user.getCep());
-        body += String.format("%-10.10s", user.isOrganize());
+        body += String.format(format2020, user.getCep());
+        body += String.format(format1010, user.isOrganize());
 
         return body;
     }

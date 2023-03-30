@@ -52,10 +52,6 @@ public class FilaObjUtil<T> {
         return primeiro;
     }
 
-    public void exibe() {
-
-    }
-
     // Getters (não retirar)
     public T[] getFila() {
         return fila;

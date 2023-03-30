@@ -17,7 +17,7 @@ public class TicketEventController {
 
     @PostMapping
     public ResponseEntity<Ticket> createTicket(@RequestBody Ticket newTicket) {
-        Ticket ticket = ticketEventService.createTicket(newTicket);
+        ticketEventService.createTicket(newTicket);
         return ResponseEntity.status(200).body(newTicket);
     }
 

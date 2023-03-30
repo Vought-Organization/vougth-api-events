@@ -14,7 +14,7 @@ import java.util.Optional;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("v1/events")
-@CrossOrigin
+@CrossOrigin("*")
 public class EventController {
     private final EventService eventService;
 

@@ -3,10 +3,11 @@ package vougth.api.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
+import vougth.api.domain.Ticket;
+import vougth.api.domain.User;
 import vougth.api.domain.UserTicket;
 import vougth.api.repository.TicketRepository;
 import vougth.api.repository.UserRepository;
@@ -31,8 +32,11 @@ public class UserTicketService {
         }
         UserTicket newUserTicket = new UserTicket();
 
-        newUserTicket.setTicket(ticketRepository.findById(newUserTicket.getTicket().getIdTicket()).get());
-        newUserTicket.setUser(userRepository.findById(newUserTicket.getUser().getIdUser()).get());
+        Ticket findTicket = ticketRepository.findById(newUserTicket.getTicket().getIdTicket()).get();
+        User findUser = userRepository.findById(newUserTicket.getUser().getIdUser()).get();
+
+        newUserTicket.setTicket(findTicket);
+        newUserTicket.setUser(findUser);
 
         newUserTicket.setApproved(newBuyRequestDto.isApproved());
         userTicketRepository.save(newUserTicket);

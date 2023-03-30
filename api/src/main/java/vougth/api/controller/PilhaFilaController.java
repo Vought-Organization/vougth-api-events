@@ -31,7 +31,11 @@ public class PilhaFilaController {
     @GetMapping("/import-events")
     @Operation(summary = "Importa os eventos para nossa base de dados")
     public ResponseEntity<Void> gravaArquivoTxt() {
-        service.recordTxtFile();
+        try {
+            service.recordTxtFile();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         return ResponseEntity.status(200).build();
     }
 

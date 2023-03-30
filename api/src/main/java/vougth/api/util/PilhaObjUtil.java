@@ -47,10 +47,6 @@ public class PilhaObjUtil<T> {
         return pilha[topo];
     }
 
-    public void exibe() {
-
-    }
-
     //Getters (não alterar)
 
     public T[] getPilha() {

@@ -29,7 +29,6 @@ public class UserService {
 
     public User createUser(User newUser) {
         return userRepository.save(newUser);
-//        return newUser;
     }
 
     public List<User> getAllUsers() throws UserNotFoundException {

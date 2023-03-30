@@ -2,7 +2,6 @@ package vougth.api.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import vougth.api.domain.Event;
@@ -19,10 +18,10 @@ import java.util.Optional;
 public class EventUserController {
     @Autowired private EventUserService eventUserService;
 
-    @PostMapping("/update-events/{id_user}")
+    @PostMapping("/update-events/{idUser}")
     @Operation(summary = "Adiciona uma relação entre Usuário e Evento")
-    public ResponseEntity<Void> addEventUser(@PathVariable Integer id_user, @RequestBody List<Integer> id_events) {
-        eventUserService.addEventUser(id_user, id_events);
+    public ResponseEntity<Void> addEventUser(@PathVariable Integer idUser, @RequestBody List<Integer> idEvents) {
+        eventUserService.addEventUser(idUser, idEvents);
         return ResponseEntity.status(201).build();
     }
 
