@@ -27,7 +27,8 @@ public class UserController {
         return ResponseEntity.status(200).body(loginList);
     }
 
-    @GetMapping @Operation(summary = "Lista todos os usuários")
+    @GetMapping
+    @Operation(summary = "Lista todos os usuários")
     public ResponseEntity<List<User>> getAllUsers(){
         List<User> usersList = userService.getAllUsers();
         return ResponseEntity.status(200).body(usersList);

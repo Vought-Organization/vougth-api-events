@@ -1,9 +1,30 @@
 server:
   port: 8080
 
+cloud:
+  aws:
+    credentials:
+      session-token: FwoGZXIvYXdzEH8aDD9dgfhaT4Hy67T33iK6AXDejgeSbZGOdn1fdI4nxl3TXrxtdTos0veMRrz4qIy3o8qcv8ZUgDU0t/1qrokgB034RGNBrzHDz9xWTvnJmJWQl3C1l+5xfetAl6i9Nd4SfKDnzr220emT2AnAImVZszhAGnIKDiBwi4YBdD0CyqCpkBUp2WUuwgOJroh7LCEAdJx4wA1SXVUsfP9Nx24vgBCTFwgqDxwkXQYjdenVYfILQkGYucYIB8COnVOkdQDud2pvQg1EMYMqLSiQjvyhBjItbLML6dCEjT45OWJyqjWAhcfq0XWP3be4T4NGPF1yZ9m+5IEiyXFjBC2Y85dA
+      access-key: ASIAWYIBPFHG4JRILTMW
+      secret-key: OSVAEZJSFp+5MUfu1nSXcBk3uTxzRoXTJv2AzejK
+    region:
+      static: us-east-1
+    stack:
+      auto: false
+
+application:
+  bucket:
+    name: meguminpaulista
+
 spring:
   profiles:
     active:
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2MB
+      max-file-size: 6MB
+      max-request-size: 10MB
 
   datasource:
     driver-class-name: org.postgresql.Driver
@@ -13,7 +34,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update # When you launch the application for the first time - switch "none" at "create"
+      ddl-auto: update
     show-sql: false
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect

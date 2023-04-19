@@ -1,6 +1,7 @@
 package vougth.api.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import vougth.api.domain.Event;
 import vougth.api.domain.User;
 import vougth.api.exception.EventNotExistsException;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Service
 public class PilhaFilaService {
     @Autowired private EventService eventService;
     @Autowired private UserService userService;
