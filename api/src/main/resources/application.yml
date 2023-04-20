@@ -4,9 +4,9 @@ server:
 cloud:
   aws:
     credentials:
-      session-token: FwoGZXIvYXdzEH8aDD9dgfhaT4Hy67T33iK6AXDejgeSbZGOdn1fdI4nxl3TXrxtdTos0veMRrz4qIy3o8qcv8ZUgDU0t/1qrokgB034RGNBrzHDz9xWTvnJmJWQl3C1l+5xfetAl6i9Nd4SfKDnzr220emT2AnAImVZszhAGnIKDiBwi4YBdD0CyqCpkBUp2WUuwgOJroh7LCEAdJx4wA1SXVUsfP9Nx24vgBCTFwgqDxwkXQYjdenVYfILQkGYucYIB8COnVOkdQDud2pvQg1EMYMqLSiQjvyhBjItbLML6dCEjT45OWJyqjWAhcfq0XWP3be4T4NGPF1yZ9m+5IEiyXFjBC2Y85dA
-      access-key: ASIAWYIBPFHG4JRILTMW
-      secret-key: OSVAEZJSFp+5MUfu1nSXcBk3uTxzRoXTJv2AzejK
+      session-token: FwoGZXIvYXdzEKf//////////wEaDDo/jB84pVITDyKp2iK6AVj4Qbyr9qLiYOuJkHmt+H/c5Rn5fkCP3jmsMT44xbG/t1kxdRn7HAlR9wM1znPSRg6l/SyBY65+yn02k7SWWFpSsQNEtfCJ+cFRYwZDbWhNDFu2xkj2LcBbnKFtPt7KVhOdI8TL9BPAkHDcXTcLmr89xMeDQYN+zetlQYuwNWuizGwGSE4FCqx4UzC7rM9fV4i8EZH1+cUBXqATJchfEKX9I9aG9tzuNGHxDjPnPdXdYNMBKvUYkURg4ijVh4WiBjItOYGIdZAcJKRV1KSSROtPL3+UbLHB3eLqOiWL6UsID0mbCNZrP0I4UWU67FQj
+      access-key: ASIAWYIBPFHG3ALWCRVC
+      secret-key: cG3KivpwWGEZu6CZZlprEv6jWbAIiCJfFCXTr1Wk
     region:
       static: us-east-1
     stack:

@@ -23,10 +23,10 @@ public class S3FileController {
     @PostMapping()
     @RequestMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, method = RequestMethod.POST)
     public ResponseEntity<Map<String, String>> upload(@RequestPart("file") MultipartFile file) {
-       String publicUrl = s3Service.saveFile(file);
-       Map<String, String> response = new HashMap<>();
-       response.put("publicURL", publicUrl);
-       return new ResponseEntity<Map<String, String>>(response, HttpStatus.CREATED);
+        String publicUrl = s3Service.saveFile(file);
+        Map<String, String> response = new HashMap<>();
+        response.put("publicURL", publicUrl);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @GetMapping("/download/{filename}")
@@ -39,12 +39,14 @@ public class S3FileController {
     }
 
     @DeleteMapping("/{filename}")
-    public String deleteFile(@PathVariable("filename") String filename) {
-        return s3Service.deleteFile(filename);
+    public ResponseEntity<Void> deleteFile(@PathVariable("filename") String filename) {
+        s3Service.deleteFile(filename);
+        return ResponseEntity.status(200).build();
     }
 
     @GetMapping("/all-files")
-    public List<String> getAllFiles() {
-        return s3Service.listAllFiles();
+    public ResponseEntity<List<String>> getAllFiles() {
+        List<String> files = s3Service.listAllFiles();
+        return ResponseEntity.status(200).body(files);
     }
 }

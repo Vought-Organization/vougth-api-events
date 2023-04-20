@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -26,21 +27,9 @@ public class S3Service implements FileServiceImpl {
     @Autowired
     private AmazonS3Client amazonS3Client;
 
-    //    @Override
-//    public String saveFile(MultipartFile file) {
-//        String originalFileName = file.getOriginalFilename();
-//        try {
-//            File file1 = convertMultiPartToFile(file);
-//            PutObjectResult putObjectResult = s3.putObject(bucketName, originalFileName, file1);
-//            return putObjectResult.getContentMd5();
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
-
-
     @Override
     public String saveFile(MultipartFile file) {
+        validationFile(Objects.requireNonNull(file.getOriginalFilename()));
         String extension = StringUtils.getFilenameExtension(file.getOriginalFilename());
         String key = UUID.randomUUID() + "." + extension;
 
@@ -88,5 +77,13 @@ public class S3Service implements FileServiceImpl {
         fos.write(file.getBytes());
         fos.close();
         return convFile;
+    }
+
+    private void validationFile(String file) {
+        if (!file.endsWith(".jpg") && !file.endsWith(".png") && !file.endsWith(".gif")) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "Incorrect file type, JPG or PNG or GIF required."
+            );
+        }
     }
 }
