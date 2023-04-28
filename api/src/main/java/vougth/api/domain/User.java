@@ -19,7 +19,7 @@ public class User {
     private String password;
     @Column(name = "profile_photo")
     private String photoProfile;
-    @Column(name = "nickname", nullable = false)
+    @Column(name = "nickname")
     private String nickname;
     @CPF private String cpf;
     private boolean organize;
