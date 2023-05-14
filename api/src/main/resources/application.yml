@@ -10,13 +10,23 @@ server:
 cloud:
   aws:
     credentials:
-      session-token: FwoGZXIvYXdzEKf//////////wEaDDo/jB84pVITDyKp2iK6AVj4Qbyr9qLiYOuJkHmt+H/c5Rn5fkCP3jmsMT44xbG/t1kxdRn7HAlR9wM1znPSRg6l/SyBY65+yn02k7SWWFpSsQNEtfCJ+cFRYwZDbWhNDFu2xkj2LcBbnKFtPt7KVhOdI8TL9BPAkHDcXTcLmr89xMeDQYN+zetlQYuwNWuizGwGSE4FCqx4UzC7rM9fV4i8EZH1+cUBXqATJchfEKX9I9aG9tzuNGHxDjPnPdXdYNMBKvUYkURg4ijVh4WiBjItOYGIdZAcJKRV1KSSROtPL3+UbLHB3eLqOiWL6UsID0mbCNZrP0I4UWU67FQj
-      access-key: ASIAWYIBPFHG3ALWCRVC
-      secret-key: cG3KivpwWGEZu6CZZlprEv6jWbAIiCJfFCXTr1Wk
+      session-token: FwoGZXIvYXdzENn//////////wEaDDllJDF7agFmwp5TsyK6AR+pVJnSGfG1aEQCYYRde3FuHW4SSUSPQFUOa7mnI88awQ+GdWSWkIKyMf7PEoB/mBv1z/BaTDnZbg/Z97+QOlsg4zqPUcXuurl+kxaP5IP0fQLeGBSX7TgxC/30zokj9j+IHhtEHzDwbKF1bjbUItQr16eVnbCyFwPPTe10qvxXbYhbBPP6tFfask/AbAFQkCYjsXdikDCfYzaiFOEfZWYuVg6YvQnTyy5vMROSzgdmyCoiddjtfpI6OSiEvoCjBjItkN68CQp091h4pLfcgmaRYBGu7X0n53xGZhEKdrdKn4ABIBJFyoBZzd+EpNMd
+      access-key: ASIAWYIBPFHGSNR36M4U
+      secret-key: rYa+pIa82uHJRUUDP2L31LvA3YBJ7yhWlKMKi+yX
     region:
       static: us-east-1
     stack:
       auto: false
+
+application:
+  security:
+    jwt:
+      secret-key: 34753778214125442A472D4A614E645267556B58703273357638792F423F4528
+      expiration: 86400000 # a day
+      refresh-token:
+        expiration: 604800000 # 7 days
+  bucket:
+    name: meguminpaulista
 
 spring:
   profiles:

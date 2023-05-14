@@ -3,6 +3,7 @@ package vougth.api.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import vougth.api.domain.Event;
 import vougth.api.exception.EventNoContentException;
 import vougth.api.exception.EventNotFoundException;
@@ -16,8 +17,10 @@ import java.util.Optional;
 public class EventService {
 
     private final EventRepository eventRepository;
+    private final S3ClientService s3ClientService;
 
-    public ResponseEntity<Event> save(Event event) {
+    public ResponseEntity<Event> save(Event event, MultipartFile file) {
+        s3ClientService.uploadFile(file);
         eventRepository.save(event);
         return ResponseEntity.status(201).body(event);
     }
