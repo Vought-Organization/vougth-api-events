@@ -17,10 +17,8 @@ import java.util.Optional;
 public class EventService {
 
     private final EventRepository eventRepository;
-    private final S3ClientService s3ClientService;
 
-    public ResponseEntity<Event> save(Event event, MultipartFile file) {
-        s3ClientService.uploadFile(file);
+    public ResponseEntity<Event> save(Event event) {
         eventRepository.save(event);
         return ResponseEntity.status(201).body(event);
     }
