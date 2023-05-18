@@ -1,11 +1,5 @@
 server:
   port: 8080
-  ssl:
-    enabled: true
-    key-store: classpath:keystore.p12
-    key-store-type: PKCS12
-    key-password: megumin123@
-    key-store-password: megumin123@
 
 cloud:
   aws:
@@ -40,7 +34,7 @@ spring:
 
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/postgres
+    url: jdbc:postgresql://54.163.233.38:5432/postgres
     username: postgres
     password: postgres
 
