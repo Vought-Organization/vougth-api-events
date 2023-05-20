@@ -11,7 +11,9 @@ import vougth.api.service.UserService;
 import java.util.List;
 import java.util.Optional;
 
-@RestController @RequestMapping("v1/users") @CrossOrigin
+@RestController
+@RequestMapping("v1/users")
+@CrossOrigin(origins = "*")
 public class UserController {
     @Autowired private UserService userService;
 

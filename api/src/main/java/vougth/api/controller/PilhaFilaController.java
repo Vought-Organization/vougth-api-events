@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("v1/files")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class PilhaFilaController {
     @Autowired private PilhaFilaService service;
 

@@ -12,7 +12,7 @@ import vougth.api.service.EventUserService;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/user-events")
 public class EventUserController {

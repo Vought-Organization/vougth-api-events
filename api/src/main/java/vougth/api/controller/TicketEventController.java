@@ -9,7 +9,7 @@ import vougth.api.service.TicketEventService;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RequestMapping("v1/ticket-events")
 public class TicketEventController {
     @Autowired
