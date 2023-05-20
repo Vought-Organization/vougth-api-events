@@ -3,6 +3,8 @@ package vougth.api.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import vougth.api.domain.User;
 import vougth.api.response.UserResponseDto;
@@ -14,11 +16,14 @@ import java.util.Optional;
 @RestController
 @RequestMapping("v1/users")
 @CrossOrigin(origins = "*")
+@Secured({"ROLE_ADMIN", "ROLE_USER", "ROLE_CLIENT"})
+//@PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN') or hasRole('ROLE_CLIENT')")
 public class UserController {
     @Autowired private UserService userService;
 
     @PostMapping @Operation(summary = "Cadastra um usuário")
     public ResponseEntity<User> createUser(@RequestBody User newUser){
+        System.out.println("entrei na controller");
         userService.createUser(newUser);
         return ResponseEntity.status(201).body(newUser);
     }

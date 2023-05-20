@@ -2,6 +2,7 @@ package vougth.api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import vougth.api.domain.Ticket;
 import vougth.api.service.TicketEventService;
@@ -11,6 +12,7 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("v1/ticket-events")
+@PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN') or hasRole('ROLE_CLIENT')")
 public class TicketEventController {
     @Autowired
     private TicketEventService ticketEventService;

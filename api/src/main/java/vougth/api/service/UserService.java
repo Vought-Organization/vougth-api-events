@@ -1,6 +1,7 @@
 package vougth.api.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import vougth.api.domain.User;
 import vougth.api.exception.UserNoContentException;
@@ -14,6 +15,7 @@ import java.util.Optional;
 @Service @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private PasswordEncoder passwordEncoder;
 
     public List<User> findAll() {
         List<User> userList = userRepository.findAll();
@@ -28,7 +30,14 @@ public class UserService {
     }
 
     public User createUser(User newUser) {
-        return userRepository.save(newUser);
+        System.out.println("entrei na service");
+//        String encodedPassword = passwordEncoder.encode(newUser.getPassword());
+//        System.out.println("antes de salvar a senha codificada");
+//        newUser.setPassword(encodedPassword);
+//        System.out.println("depois de salvar a senha codificada");
+        User returned = userRepository.save(newUser);
+        System.out.println("consegui cadastrar");
+        return returned;
     }
 
     public List<User> getAllUsers() throws UserNotFoundException {

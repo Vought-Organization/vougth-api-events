@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import vougth.api.domain.Event;
 import vougth.api.service.PilhaFilaService;
@@ -16,6 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("v1/files")
 @CrossOrigin(origins = "*")
+@PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN') or hasRole('ROLE_CLIENT')")
 public class PilhaFilaController {
     @Autowired private PilhaFilaService service;
 

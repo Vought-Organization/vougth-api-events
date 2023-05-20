@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -19,6 +20,7 @@ import java.util.Map;
 @RequestMapping("/api/v1/file")
 @RequiredArgsConstructor
 @SecurityRequirement(name = "bearerAuth")
+@PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN') or hasRole('ROLE_CLIENT')")
 public class S3ClientController {
 
     private final S3ClientService s3ClientService;

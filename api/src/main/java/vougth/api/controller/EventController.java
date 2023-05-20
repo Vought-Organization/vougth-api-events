@@ -3,6 +3,7 @@ package vougth.api.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import vougth.api.domain.Event;
 import vougth.api.service.EventService;
@@ -15,6 +16,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RequestMapping("v1/events")
 @CrossOrigin(origins = "*")
+@PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN') or hasRole('ROLE_CLIENT')")
 public class EventController {
     private final EventService eventService;
 

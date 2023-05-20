@@ -3,6 +3,7 @@ package vougth.api.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import vougth.api.domain.Event;
 import vougth.api.domain.EventUser;
@@ -15,6 +16,7 @@ import java.util.Optional;
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/user-events")
+@PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN') or hasRole('ROLE_CLIENT')")
 public class EventUserController {
     @Autowired private EventUserService eventUserService;
 

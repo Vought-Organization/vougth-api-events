@@ -2,6 +2,7 @@ package vougth.api.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
@@ -11,6 +12,7 @@ import vougth.api.exception.*;
 import java.time.LocalDateTime;
 
 @ControllerAdvice
+@PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
 public class CustomizedExceptionHandling extends ResponseEntityExceptionHandler {
 
 
