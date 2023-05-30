@@ -125,7 +125,7 @@ public class PilhaFilaService {
         body += String.format("%03d ", event.getIdEvent());
         body += String.format(format4040, event.getNameEvent());
         body += String.format(format1010, event.getCep());
-        body += String.format(format1010, event.getCategoryEvent());
+        body += String.format(format1010, event.getCategory());
         body += String.format("%-50.50s", event.getAddressEvent());
         body += "\n";
         body += String.format("%-25.25s", event.getDescription());

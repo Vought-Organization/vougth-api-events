@@ -47,5 +47,11 @@ public class EventController {
     public Event updateUserById(@PathVariable int id, @RequestBody Event updatedEvent) {
         return eventService.update(id, updatedEvent);
     }
+
+    @GetMapping("/find-category")
+    @Operation(summary = "Busca Eventos pela categoria")
+    public List<Event> findALlEventsByCategory(@RequestParam("category") String category) {
+        return eventService.getEventsByCategory(category);
+    }
 }
 

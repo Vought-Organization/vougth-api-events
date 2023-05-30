@@ -18,7 +18,7 @@ public class TxtAdapter {
             writer.write("ID: " + eventTxt.getIdEvent() + "\n" +
                     "Nome: " + eventTxt.getNameEvent() + "\n" +
                     "CEP: " + eventTxt.getCep() + "\n" +
-                    "Categoria: " + eventTxt.getCategoryEvent() + "\n" +
+                    "Categoria: " + eventTxt.getCategory() + "\n" +
                     "Endereço: " + eventTxt.getAddressEvent() + "\n" +
                     "Descrição: " + eventTxt.getDescription() + "\n" +
                     "Cidade: " + eventTxt.getCity() + "\n" +

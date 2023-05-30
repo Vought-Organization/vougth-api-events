@@ -64,6 +64,10 @@ public class EventService {
         throw new EventNotFoundException();
     }
 
+    public List<Event> getEventsByCategory(String category) {
+        return eventRepository.findByCategory(category);
+    }
+
     public Long count(){
         return eventRepository.count();
     }
