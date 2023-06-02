@@ -13,8 +13,6 @@ g
 7api/src/main/java/vougth/api/service/TicketService.java,9\4\944b1d9d422142c156db306d34ecd37e5be6b733
 p
 @api/src/main/java/vougth/api/controller/PilhaFilaController.java,2\c\2cd8e2baf9dd14ee9780a3ee13e951d7f7196d36
-_
-/api/src/main/java/vougth/api/domain/Ticket.java,0\9\09632124ae81479e37a10926907d6655ca5fbe79
 q
 Aapi/src/main/java/vougth/api/controller/UserTicketController.java,8\b\8b3b6621272136ad4574d2d841219fe6dd36a1ed
 q
@@ -23,8 +21,6 @@ m
 =api/src/main/java/vougth/api/repository/TicketRepository.java,d\b\dba8c67884bc8f0a301ea4cc8721656e61d14b5f
 l
 <api/src/main/java/vougth/api/repository/EventRepository.java,5\9\59d5a13e112db1cd9431781d4cd76b6a3410644a
-x
-Hapi/src/main/java/vougth/api/controller/CustomizedExceptionHandling.java,b\9\b96c40836e49dc3cf71fdbace5dd83abdf836b77
 r
 Bapi/src/main/java/vougth/api/exception/EventNotFoundException.java,f\1\f193b90007523254404bdb97a48ff51d916e01e5
 m
@@ -65,19 +61,17 @@ j
 :api/src/main/java/vougth/api/service/PilhaFilaService.java,d\d\dd2044100162dc50143025c5a150dbd30c1717d2
 m
 =api/src/main/java/vougth/api/controller/TicketController.java,1\c\1c68d3c9c46dcee698d91284e1927d9a5900cc60
-k
-;api/src/main/java/vougth/api/repository/UserRepository.java,4\e\4e1bcc57e1f52915e8f307184405638c91afcc72
-j
-:api/src/main/java/vougth/api/response/UserResponseDto.java,7\b\7b5d5b01046139fee24776512ad60bc0687b468b
 r
 Bapi/src/main/java/vougth/api/controller/TicketEventController.java,a\0\a00070b8762353d2a8b75442f6f386ac1e38bd4a
-]
--api/src/main/java/vougth/api/domain/User.java,6\f\6ff11eecb05e8634208c995a620bbd6681f62aba
 f
 6api/src/main/java/vougth/api/service/EventService.java,8\e\8e5ca66c4dd6dcc2a0dae1f2a1ce703175d0ee84
 l
 <api/src/main/java/vougth/api/controller/EventController.java,e\a\ea234799962ac62fd68c53c23e9574469651598c
 8
 api/mvnw,e\d\ed1bfdb9dd1a0bb2dd77100407288940e9cf06ef
+=
+api/stack.yml,5\3\53f428c1fbfe64f38e0d82ab2b78154bb09cb82e
+x
+Hapi/src/main/java/vougth/api/controller/CustomizedExceptionHandling.java,b\9\b96c40836e49dc3cf71fdbace5dd83abdf836b77
 ;
 api/pom.xml,f\e\fe5c43214168bd8de1d8afa275215a8e9b9de634

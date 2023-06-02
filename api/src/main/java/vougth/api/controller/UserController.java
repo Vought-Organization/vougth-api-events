@@ -53,4 +53,10 @@ public class UserController {
         User user = userService.updateUserById(id, updatedUser);
         return ResponseEntity.status(200).body(user);
     }
+
+    @PutMapping("/cpf/{cpf}") @Operation(summary = "Atualiza um usuário específico")
+    public ResponseEntity<User> updateUserByCpf(@PathVariable String cpf, @RequestBody User updatedUser){
+        User user = userService.updateUserByCpf(cpf, updatedUser);
+        return ResponseEntity.status(200).body(user);
+    }
 }

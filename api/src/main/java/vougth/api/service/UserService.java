@@ -56,4 +56,12 @@ public class UserService {
         }
         return updatedUser;
     }
+
+    public User updateUserByCpf(String cpf, User updatedUser){
+        if (userRepository.existsByCpf(cpf)) {
+            updatedUser.setCpf(cpf);
+            userRepository.save(updatedUser);
+        }
+        return updatedUser;
+    }
 }

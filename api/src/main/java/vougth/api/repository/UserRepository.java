@@ -13,4 +13,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query("select new vougth.api.response.UserResponseDto(u.idUser, u.userName, u.password, u.email) from User u")
     List<UserResponseDto> getUserResponse();
 
+    boolean existsByCpf(String cpf);
+
+    User getUserByCpf(String cpf);
 }
