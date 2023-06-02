@@ -34,7 +34,7 @@ spring:
 
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://54.163.233.38:5432/postgres
+    url: jdbc:postgresql://54.159.231.168:5432/postgres
     username: postgres
     password: postgres
 
