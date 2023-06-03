@@ -1,0 +1,27 @@
+#!groovy
+def call(body) {
+    //Parser Configuration Received from Pipeline
+    def config = [:]
+    body.resolveStrategy = Closure.DELEGATE_FIRST
+    body.delegate = config
+    body()
+
+    // Pipeline
+    pipeline {
+        agent any
+
+        environment {
+
+        }
+
+        stages{
+            stage('Teste de conexão'){
+                steps{
+                    script{
+                        echo "teste bem sucedido"
+                    }
+                }
+            }
+        }
+    }
+}
