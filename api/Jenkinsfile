@@ -10,9 +10,9 @@ def call(body) {
     pipeline {
         agent any
 
-        environment {
-
-        }
+//         environment {
+//
+//         }
 
         stages{
             stage('Teste de conexão'){
