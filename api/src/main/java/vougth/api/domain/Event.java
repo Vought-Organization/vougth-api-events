@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Builder
@@ -16,18 +15,14 @@ import java.time.LocalDateTime;
 @Data
 @Table(name = "events")
 public class Event {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idEvent;
     @Column(name = "cep")
     private String cep;
     @Column(name = "name_event")
     private String nameEvent;
-
     @Column(name = "profile_photo")
     private String photoProfile;
-
     @Column(name = "category_event")
     private String category;
     @Column(name = "description")
@@ -43,11 +38,7 @@ public class Event {
     @Column(name = "state")
     private String state;
     @Column(name = "startData", nullable = false)
-    private LocalDateTime startData;
+    private String startData;
     @Column(name = "endData", nullable = false)
-    private LocalDateTime endData;
-
-
+    private String endData;
 }
-
-
