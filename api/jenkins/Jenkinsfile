@@ -6,10 +6,10 @@ pipeline {
 
     environment {
         // variáveis úteis
-        def repoPWD = "git clone -b ${REPO_BRANCH} ${REPO_URL} && cd ${REPO_NAME} && git checkout ${REPO_BRANCH}"
-        def repoDevops = ""
-        def shortCommit = ""
-        def varVersion = ""
+        def repoPWD
+        def repoDevops
+        def shortCommit
+        def varVersion
 
         // mensagem do jenkins
         MSG_JENKINS = "Teste de conexão"
