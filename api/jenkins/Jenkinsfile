@@ -46,6 +46,8 @@ pipeline {
             steps{
                 script{
                     def functions = load '../src/main/java/libs/functions/Functions.groovy'
+                }
+                script{
                     repoPWD = functions.cloneAndCheckout("${REPO_URL}","${REPO_NAME}","${REPO_BRANCH}")
                     shortCommit = functions.getShortCommitHash("${repoPWD}")
                 }
