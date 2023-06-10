@@ -19,7 +19,7 @@ pipeline {
         REPO_BRANCH = "main"
 
         // configuração do docker
-        DOCKER_REPO
+//         DOCKER_REPO
         USERNAME_DOCKER = "vought"
         PASSWORD_DOCKER = "Vought@123"
 
@@ -88,16 +88,16 @@ pipeline {
             }
         }
 
-        stage('Configuração e envio da imagem do Docker'){
-            steps{
-                dir(repoPWD){
-                    script{
-                        sh "docker build -t ${DOCKER_REPO}:${varVersion} ."
-                        sh "docker login -u $USERNAME_DOCKER -p $PASSWORD_DOCKER"
-                        sh "docker push ${DOCKER_REPO}:${varVersion}"
-                    }
-                }
-            }
-        }
+//         stage('Configuração e envio da imagem do Docker'){
+//             steps{
+//                 dir(repoPWD){
+//                     script{
+//                         sh "docker build -t ${DOCKER_REPO}:${varVersion} ."
+//                         sh "docker login -u $USERNAME_DOCKER -p $PASSWORD_DOCKER"
+//                         sh "docker push ${DOCKER_REPO}:${varVersion}"
+//                     }
+//                 }
+//             }
+//         }
     }
 }
