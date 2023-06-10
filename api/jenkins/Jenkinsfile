@@ -6,7 +6,7 @@ pipeline {
 
     environment {
         // variáveis úteis
-        def repoPWD = sh "git clone -b ${REPO_BRANCH} ${REPO_URL} && cd ${REPO_NAME} && git checkout ${REPO_BRANCH}"
+        def repoPWD = "git clone -b ${REPO_BRANCH} ${REPO_URL} && cd ${REPO_NAME} && git checkout ${REPO_BRANCH}"
         def repoDevops = ""
         def shortCommit = ""
         def varVersion = ""
