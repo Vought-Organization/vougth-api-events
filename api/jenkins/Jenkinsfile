@@ -10,7 +10,7 @@ pipeline {
         def repoDevops = ""
         def shortCommit = ""
         def varVersion = ""
-        def functions = load './src/functions/Functions.groovy'
+        def functions = new functions.Functions()
 
         // mensagem do jenkins
         MSG_JENKINS = "Teste de conexão"
