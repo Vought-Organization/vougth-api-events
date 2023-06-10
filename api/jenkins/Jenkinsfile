@@ -4,7 +4,7 @@ pipeline {
     agent any
 
     // imports
-    def git = new libs.functions.Functions()
+    def functions = load
 
     // variáveis úteis
     def repoPWD
@@ -48,8 +48,8 @@ pipeline {
         stage("Clonagem do repositório"){
             steps{
                 script{
-                    repoPWD = git.cloneAndCheckout("${REPO_URL}","${REPO_NAME}","${REPO_BRANCH}")
-                    shortCommit = git.getShortCommitHash("${repoPWD}")
+                    repoPWD = functions.cloneAndCheckout("${REPO_URL}","${REPO_NAME}","${REPO_BRANCH}")
+                    shortCommit = functions.getShortCommitHash("${repoPWD}")
                 }
             }
         }
@@ -59,7 +59,7 @@ pipeline {
                 dir(repoPWD){
                     script{
                         sh "mvn versions:set -DnewVersion=${REPO_NAME}.${REPO_BRANCH}.${env.BUILD_NUMBER}.${shortCommit} && mvn versions:commit -DprocessAllModules"
-                        echo "New Version: ${REPO_NAME}.${REPO_BRANCH}.${env.BUILD_NUMBER}.${shortCommit}"
+                        echo "Nova versão: ${REPO_NAME}.${REPO_BRANCH}.${env.BUILD_NUMBER}.${shortCommit}"
                         varVersion = "${REPO_NAME}.${REPO_BRANCH}.${env.BUILD_NUMBER}.${shortCommit}"
                     }
                 }
