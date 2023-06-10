@@ -10,7 +10,7 @@ pipeline {
         def repoDevops = ""
         def shortCommit = ""
         def varVersion = ""
-        def git = new libs.Git()
+        def git = new jenkins.libs.Git()
 
         // mensagem do jenkins
         MSG_JENKINS = "Teste de conexão"
