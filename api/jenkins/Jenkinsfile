@@ -3,14 +3,15 @@
 pipeline {
     agent any
 
-
     environment {
+        import src.functions.Functions
+
         // variáveis úteis
         def repoPWD = ""
         def repoDevops = ""
         def shortCommit = ""
         def varVersion = ""
-        def functions = new functions.Functions()
+        def functions = new Functions()
 
         // mensagem do jenkins
         MSG_JENKINS = "Teste de conexão"
