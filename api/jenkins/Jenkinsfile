@@ -15,7 +15,7 @@ pipeline {
         MSG_JENKINS = "Teste de conexão"
 
         // configuração do repositório
-        REPO_NAME = "vought-api-events"
+        REPO_NAME = "vougth-api-events"
         REPO_URL = "git@github.com:Vought-Organization/vougth-api-events.git"
         REPO_BRANCH = "main"
 
