@@ -49,7 +49,7 @@ pipeline {
 //                     echo "Início da clonagem do repositório"
 //                 }
                 script{
-                    def git = new jenkins.src.Git()
+                    def git = new src.libs.Git()
                     repoPWD = git.cloneAndCheckout("${REPO_URL}","${REPO_NAME}","${REPO_BRANCH}")
                     shortCommit = git.getShortCommitHash("${repoPWD}")
                     echo "Commit Hash: ${repoPWD}"
