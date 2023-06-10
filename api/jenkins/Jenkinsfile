@@ -4,10 +4,10 @@ pipeline {
     agent any
 
     // variáveis úteis
-    def repoPWD
-    def repoDevops
-    def shortCommit
-    def varVersion
+    def repoPWD = null
+    def repoDevops = null
+    def shortCommit = null
+    def varVersion = null
 
     environment {
         // mensagem do jenkins
