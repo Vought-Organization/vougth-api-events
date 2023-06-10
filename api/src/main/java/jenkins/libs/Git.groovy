@@ -1,6 +1,5 @@
-package libs.functions
+package jenkins.libs
 
-class Functions {
     String cloneAndCheckout(String REPO, String REPO_NAME, String BRANCH){
         def PWD
         sh "git clone -b ${BRANCH} ${REPO} && cd ${REPO_NAME} && git checkout ${BRANCH}"
@@ -13,6 +12,5 @@ class Functions {
         shortCommit = sh (script:  "cd ${REPO_PWD} && git rev-parse --short HEAD", returnStdout: true).trim()
         return shortCommit
     }
-}
 
 return this
