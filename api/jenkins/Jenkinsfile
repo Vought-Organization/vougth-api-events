@@ -1,0 +1,123 @@
+#!groovy
+// Pipeline
+pipeline {
+    agent any
+
+    // variáveis úteis
+    def repoPWD
+    def repoDevops
+    def shortCommit
+    def varVersion
+
+    // métodos
+    def String cloneAndCheckout(String REPO, String REPO_NAME, String BRANCH){
+        script {
+            sh "rm -rf *"
+            sh "git clone -b ${BRANCH} ${REPO} && cd ${REPO_NAME} && git checkout ${BRANCH}"
+            PWD = sh (
+                    script:  "cd ${REPO_NAME} && pwd",
+                    returnStdout: true
+            ).trim()
+            return PWD
+        }
+    }
+
+    def String getShortCommitHash(String REPO_PWD) {
+        script {
+            shortCommit = sh (
+                    script:  "cd ${REPO_PWD} && git rev-parse --short HEAD",
+                    returnStdout: true
+            ).trim()
+            return shortCommit
+        }
+    }
+
+    environment {
+        // mensagem do jenkins
+        MSG_JENKINS = "Teste de conexão"
+
+        // configuração do repositório
+        REPO_NAME = "vought-api-events"
+        REPO_URL = "git@github.com:Vought-Organization/vougth-api-events.git"
+        REPO_BRANCH = "main"
+
+        // configuração do docker
+        DOCKER_REPO
+        USERNAME_DOCKER = "vought"
+        PASSWORD_DOCKER = "Vought@123"
+
+        // configuração do IP do SonarQube
+        SONAR_PROJECTKEY = "backend"
+        SONAR_ORG = "vought"
+        SONAR_URL = "34.196.201.94:9000"
+        SONAR_LOGIN = "squ_f7795b286ea9579888a0049f626cede2d00d2fb9"
+
+        // configuração para acesso à AWS
+        SSH_KEY = "ssh -i '/home/jenkins/keys/backend.pem' ubuntu@ec2-54-159-231-168.compute-1.amazonaws.com"
+    }
+
+    stages{
+        stage('Teste de conexão'){
+            steps{
+                script{
+                    echo "teste bem sucedido"
+                }
+            }
+        }
+
+        stage("Clonagem do repositório"){
+            steps{
+                script{
+                    repoPWD = git.cloneAndCheckout("${REPO_URL}","${REPO_NAME}","${REPO_BRANCH}")
+                    shortCommit = git.getShortCommitHash("${repoPWD}")
+                }
+            }
+        }
+
+        stage("Definição de versão do maven"){
+            steps{
+                dir(repoPWD){
+                    script{
+                        sh "mvn versions:set -DnewVersion=${REPO_NAME}.${REPO_BRANCH}.${env.BUILD_NUMBER}.${shortCommit} && mvn versions:commit -DprocessAllModules"
+                        echo "New Version: ${REPO_NAME}.${REPO_BRANCH}.${env.BUILD_NUMBER}.${shortCommit}"
+                        varVersion = "${REPO_NAME}.${REPO_BRANCH}.${env.BUILD_NUMBER}.${shortCommit}"
+                    }
+                }
+            }
+        }
+
+        stage("Build do projeto"){
+            steps{
+                dir(repoPWD){
+                    script{
+                        echo "${shortCommit}"
+                        sh "mvn clean install"
+                    }
+                }
+            }
+        }
+
+        stage('Análise de qualidade'){
+            steps{
+                dir(repoPWD){
+                    script{
+                        sh 'docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube:9.9.1-community'
+                        sh 'mvn sonar:sonar -Dsonar.projectKey=${SONAR_PROJECTKEY} -Dsonar.organization=${SONAR_ORG} -Dsonar.host.url=${SONAR_URL} -Dsonar.login=${SONAR_LOGIN}'
+                    }
+                }
+            }
+        }
+
+        stage('Configuração e envio da imagem do Docker'){
+            steps{
+                dir(repoPWD){
+                    script{
+                        sh "docker build -t ${DOCKER_REPO}:${varVersion} ."
+                        sh "docker login -u $USERNAME_DOCKER -p $PASSWORD_DOCKER"
+                        sh "docker push ${DOCKER_REPO}:${varVersion}"
+                    }
+                }
+            }
+        }
+    }
+}
