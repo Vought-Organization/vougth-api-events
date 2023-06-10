@@ -3,9 +3,6 @@
 pipeline {
     agent any
 
-    // imports
-    def functions = load '../src/main/java/libs/functions/Functions.groovy'
-
     // variáveis úteis
     def repoPWD
     def repoDevops
@@ -48,6 +45,7 @@ pipeline {
         stage("Clonagem do repositório"){
             steps{
                 script{
+                    def functions = load '../src/main/java/libs/functions/Functions.groovy'
                     repoPWD = functions.cloneAndCheckout("${REPO_URL}","${REPO_NAME}","${REPO_BRANCH}")
                     shortCommit = functions.getShortCommitHash("${repoPWD}")
                 }
