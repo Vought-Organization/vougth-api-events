@@ -10,6 +10,7 @@ pipeline {
         def repoDevops = ""
         def shortCommit = ""
         def varVersion = ""
+        def functions = load '../src/main/java/libs/functions/Functions.groovy'
 
         // mensagem do jenkins
         MSG_JENKINS = "Teste de conexão"
@@ -45,10 +46,9 @@ pipeline {
 
         stage("Clonagem do repositório"){
             steps{
-                script{
-                    echo "Início da clonagem do repositório"
-                    def functions = load '../src/main/java/libs/functions/Functions.groovy'
-                }
+//                 script{
+//                     echo "Início da clonagem do repositório"
+//                 }
                 script{
                     sh "sudo git clone -b ${REPO_BRANCH} ${REPO_URL} && cd ${REPO_NAME} && git checkout ${REPO_BRANCH}"
                     repoPWD = functions.cloneAndCheckout("${REPO_URL}","${REPO_NAME}","${REPO_BRANCH}")
