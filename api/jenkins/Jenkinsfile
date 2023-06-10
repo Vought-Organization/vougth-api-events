@@ -6,10 +6,10 @@ pipeline {
 
     environment {
         // variáveis úteis
-        def repoPWD
-        def repoDevops
-        def shortCommit
-        def varVersion
+        def repoPWD = ""
+        def repoDevops = ""
+        def shortCommit = ""
+        def varVersion = ""
 
         // mensagem do jenkins
         MSG_JENKINS = "Teste de conexão"
@@ -63,9 +63,9 @@ pipeline {
                 dir(repoPWD){
                     script{
                         echo "Início da definição da versão do Maven"
-                        sh "mvn versions:set -DnewVersion=${REPO_NAME}.${REPO_BRANCH}.${env.BUILD_NUMBER}.${shortCommit} && mvn versions:commit -DprocessAllModules"
-                        echo "Nova versão: ${REPO_NAME}.${REPO_BRANCH}.${env.BUILD_NUMBER}.${shortCommit}"
-                        varVersion = "${REPO_NAME}.${REPO_BRANCH}.${env.BUILD_NUMBER}.${shortCommit}"
+                        sh "mvn versions:set -DnewVersion=${REPO_NAME}.${REPO_BRANCH}.${env.BUILD_NUMBER} && mvn versions:commit -DprocessAllModules"
+                        echo "Nova versão: ${REPO_NAME}.${REPO_BRANCH}.${env.BUILD_NUMBER}"
+                        varVersion = "${REPO_NAME}.${REPO_BRANCH}.${env.BUILD_NUMBER}"
                     }
                 }
             }
