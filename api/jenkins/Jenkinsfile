@@ -3,13 +3,14 @@
 pipeline {
     agent any
 
-    // variáveis úteis
-    def repoPWD = ""
-    def repoDevops = ""
-    def shortCommit = ""
-    def varVersion = ""
 
     environment {
+        // variáveis úteis
+        def repoPWD = ""
+        def repoDevops = ""
+        def shortCommit = ""
+        def varVersion = ""
+
         // mensagem do jenkins
         MSG_JENKINS = "Teste de conexão"
 
