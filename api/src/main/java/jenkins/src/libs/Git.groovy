@@ -1,4 +1,4 @@
-package jenkins.libs
+package jenkins.src.libs
 
     def String cloneAndCheckout(String REPO, String REPO_NAME, String BRANCH){
         script {
