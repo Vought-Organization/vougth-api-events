@@ -50,7 +50,7 @@ pipeline {
                     def functions = load '../src/main/java/libs/functions/Functions.groovy'
                 }
                 script{
-                    sh "git clone -b ${REPO_BRANCH} ${REPO_URL} && cd ${REPO_NAME} && git checkout ${REPO_BRANCH}"
+                    sh "sudo git clone -b ${REPO_BRANCH} ${REPO_URL} && cd ${REPO_NAME} && git checkout ${REPO_BRANCH}"
 //                     repoPWD = functions.cloneAndCheckout("${REPO_URL}","${REPO_NAME}","${REPO_BRANCH}")
                     shortCommit = functions.getShortCommitHash("${repoPWD}")
                     echo "Commit Hash: ${repoPWD}"
