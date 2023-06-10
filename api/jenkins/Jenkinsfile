@@ -46,6 +46,7 @@ pipeline {
         stage("Clonagem do repositório"){
             steps{
                 script{
+                    echo "Início da clonagem do repositório"
                     def functions = load '../src/main/java/libs/functions/Functions.groovy'
                 }
                 script{
@@ -59,6 +60,7 @@ pipeline {
             steps{
                 dir(repoPWD){
                     script{
+                        echo "Início da definição da versão do Maven"
                         sh "mvn versions:set -DnewVersion=${REPO_NAME}.${REPO_BRANCH}.${env.BUILD_NUMBER}.${shortCommit} && mvn versions:commit -DprocessAllModules"
                         echo "Nova versão: ${REPO_NAME}.${REPO_BRANCH}.${env.BUILD_NUMBER}.${shortCommit}"
                         varVersion = "${REPO_NAME}.${REPO_BRANCH}.${env.BUILD_NUMBER}.${shortCommit}"
@@ -71,6 +73,7 @@ pipeline {
             steps{
                 dir(repoPWD){
                     script{
+                        echo "Início do build do projeto via Maven"
                         echo "${shortCommit}"
                         sh "mvn clean install"
                     }
@@ -82,8 +85,10 @@ pipeline {
             steps{
                 dir(repoPWD){
                     script{
+                        echo "Início da análise da qualidade do código via SonarQube"
                         sh 'docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube:9.9.1-community'
                         sh 'mvn sonar:sonar -Dsonar.projectKey=${SONAR_PROJECTKEY} -Dsonar.organization=${SONAR_ORG} -Dsonar.host.url=${SONAR_URL} -Dsonar.login=${SONAR_LOGIN}'
+                        sh 'docker stop sonarqube'
                     }
                 }
             }
@@ -93,6 +98,7 @@ pipeline {
 //             steps{
 //                 dir(repoPWD){
 //                     script{
+//                         echo "Início da configuração da imagem do projeto"
 //                         sh "docker build -t ${DOCKER_REPO}:${varVersion} ."
 //                         sh "docker login -u $USERNAME_DOCKER -p $PASSWORD_DOCKER"
 //                         sh "docker push ${DOCKER_REPO}:${varVersion}"
