@@ -10,7 +10,6 @@ pipeline {
         def repoDevops = ""
         def shortCommit = ""
         def varVersion = ""
-        def git = new jenkins.libs.Git()
 
         // mensagem do jenkins
         MSG_JENKINS = "Teste de conexão"
@@ -50,7 +49,7 @@ pipeline {
 //                     echo "Início da clonagem do repositório"
 //                 }
                 script{
-                    sh "sudo git clone -b ${REPO_BRANCH} ${REPO_URL} && cd ${REPO_NAME} && git checkout ${REPO_BRANCH}"
+                    def git = new jenkins.libs.Git()
                     repoPWD = git.cloneAndCheckout("${REPO_URL}","${REPO_NAME}","${REPO_BRANCH}")
                     shortCommit = git.getShortCommitHash("${repoPWD}")
                     echo "Commit Hash: ${repoPWD}"
