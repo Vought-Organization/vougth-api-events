@@ -97,19 +97,6 @@ def call(body) {
                     }
                 }
             }
-
-//         stage('Configuração e envio da imagem do Docker'){
-//             steps{
-//                 dir(repoPWD){
-//                     script{
-//                         echo "Início da configuração da imagem do projeto"
-//                         sh "docker build -t ${DOCKER_REPO}:${varVersion} ."
-//                         sh "docker login -u $USERNAME_DOCKER -p $PASSWORD_DOCKER"
-//                         sh "docker push ${DOCKER_REPO}:${varVersion}"
-//                     }
-//                 }
-//             }
-//         }
         }
     }
 }
