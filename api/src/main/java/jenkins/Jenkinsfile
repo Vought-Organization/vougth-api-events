@@ -38,8 +38,6 @@ def call(body) {
         agent any
 
         environment {
-
-
             // mensagem do jenkins
             MSG_JENKINS = "Teste de conexão"
 
@@ -74,9 +72,9 @@ def call(body) {
 
             stage("Clonagem do repositório"){
                 steps{
-    //                 script{
-    //                     echo "Início da clonagem do repositório"
-    //                 }
+                    script{
+                        echo "Início da clonagem do repositório"
+                    }
                     script{
                         repoPWD = git.cloneAndCheckout("${REPO_URL}","${REPO_NAME}","${REPO_BRANCH}")
                         shortCommit = git.getShortCommitHash("${repoPWD}")
