@@ -9,7 +9,7 @@ def call(body) {
     def git = new Git()
 
     // métodos
-    class Git() {
+    class Git {
         def String cloneAndCheckout(String REPO, String REPO_NAME, String BRANCH){
             script {
                 sh "git clone -b ${BRANCH} ${REPO} && cd ${REPO_NAME} && git checkout ${BRANCH}"
